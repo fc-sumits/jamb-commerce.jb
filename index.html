@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>JAMB Commerce — 700 Most Repeated Questions</title>
+<link rel="manifest" href="manifest.json">
+<style>
+  :root{--bg:#0b1020;--card:#16213e;--card2:#1b2a4a;--line:#27395f;--txt:#e8eefc;--muted:#9fb0d0;--gold:#ffc94a;--green:#22c55e;--green-bg:#0d3b22;--red:#ef4444;--red-bg:#3f1010;--blue:#3b82f6}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#1a2a52 0%,var(--bg) 55%) fixed;color:var(--txt);min-height:100vh;line-height:1.55;padding-bottom:env(safe-area-inset-bottom)}
+  .wrap{max-width:820px;margin:0 auto;padding:18px 16px 60px}
+  header.top{display:flex;align-items:center;gap:12px;padding:14px 16px;margin-bottom:18px;background:linear-gradient(135deg,#1b2a4a,#131d36);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  header.top .logo{width:44px;height:44px;flex:0 0 44px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:19px;background:linear-gradient(135deg,var(--gold),#ff9f1a);color:#3a2a00;box-shadow:0 6px 16px rgba(255,201,74,.25)}
+  header.top h1{font-size:17px;margin:0;line-height:1.25}
+  header.top p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .section-title{display:flex;align-items:center;justify-content:space-between;margin:6px 2px 12px;font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .set-card{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;text-align:left;color:var(--txt);transition:.15s;font-family:inherit}
+  .set-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 10px 24px rgba(255,201,74,.14)}
+  .set-card:active{transform:scale(.98)}
+  .set-card .num{font-size:26px;font-weight:800;color:var(--gold);line-height:1}
+  .set-card .lbl{font-size:13px;color:var(--muted);margin-top:6px}
+  .set-card .prog{margin-top:12px;height:6px;border-radius:99px;background:#0d1730;overflow:hidden}
+  .set-card .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#ff9f1a);border-radius:99px;transition:width .3s}
+  .quizbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:var(--card);color:var(--txt);padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;display:inline-flex;align-items:center;gap:8px}
+  .btn:hover{border-color:var(--gold);color:var(--gold)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn.primary{background:linear-gradient(135deg,var(--gold),#ff9f1a);color:#3a2a00;border:none;box-shadow:0 6px 18px rgba(255,201,74,.25)}
+  .btn.ghost{background:transparent}
+  .track{height:8px;background:#0d1730;border-radius:99px;overflow:hidden;margin-bottom:16px;border:1px solid var(--line)}
+  .track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3b82f6,var(--gold));transition:width .3s;border-radius:99px}
+  .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .pill{font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px;background:#0d1730;border:1px solid var(--line);color:var(--muted);letter-spacing:.03em}
+  .pill.year{background:linear-gradient(135deg,rgba(255,201,74,.22),rgba(255,159,26,.12));border:1px solid var(--gold);color:var(--gold);box-shadow:0 0 0 3px rgba(255,201,74,.08);text-shadow:0 0 12px rgba(255,201,74,.45)}
+  .pill.year::before{content:"★ "}
+  .qcard{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:20px 18px;box-shadow:0 14px 34px rgba(0,0,0,.32);animation:pop .25s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .qtext{font-size:16.5px;font-weight:600;margin:0 0 16px;line-height:1.5}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;background:#111c34;border:1.5px solid var(--line);border-radius:13px;padding:13px 14px;cursor:pointer;color:var(--txt);font-size:15px;font-family:inherit;transition:.15s;line-height:1.45}
+  .opt:hover:not(.locked){border-color:var(--blue);background:#152244;transform:translateX(2px)}
+  .opt .key{flex:0 0 26px;height:26px;border-radius:8px;display:grid;place-items:center;background:#0b1528;border:1px solid var(--line);font-size:12.5px;font-weight:800;color:var(--muted)}
+  .opt.locked{cursor:default}
+  .opt.correct{border-color:var(--green);background:var(--green-bg)}
+  .opt.correct .key{background:var(--green);color:#04170c;border-color:var(--green)}
+  .opt.wrong{border-color:var(--red);background:var(--red-bg)}
+  .opt.wrong .key{background:var(--red);color:#fff;border-color:var(--red)}
+  .opt.dim{opacity:.55}
+  .explain{margin-top:16px;border-radius:13px;padding:14px 16px;font-size:14.5px;border:1px solid var(--line);background:#0e1830;animation:pop .25s ease;line-height:1.6}
+  .explain.ok{border-color:var(--green);background:linear-gradient(160deg,#0d3b22,#0a2a19)}
+  .explain.no{border-color:var(--red);background:linear-gradient(160deg,#3f1010,#2a0b0b)}
+  .explain .head{display:flex;align-items:center;gap:8px;font-weight:800;margin-bottom:6px;font-size:14px}
+  .explain.ok .head{color:#5ef08e}
+  .explain.no .head{color:#ff8a8a}
+  .explain .ansline{font-weight:700;color:var(--gold);margin-bottom:6px}
+  .explain .body{color:#d5e2f8}
+  .nav{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .nav .btn{flex:1;justify-content:center;min-width:110px}
+  .result{text-align:center;background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:30px 20px}
+  .score-ring{width:150px;height:150px;border-radius:50%;margin:6px auto 16px;display:grid;place-items:center;position:relative;background:conic-gradient(var(--gold) 0deg,#0d1730 0deg);transition:background .6s ease}
+  .score-ring::after{content:"";position:absolute;inset:11px;border-radius:50%;background:#101a33}
+  .score-ring span{position:relative;z-index:1;font-size:30px;font-weight:800;color:var(--gold)}
+  .result h2{margin:0 0 6px;font-size:20px}
+  .result p{color:var(--muted);margin:0 0 18px;font-size:14.5px}
+  .hidden{display:none!important}
+  @media(max-width:480px){.wrap{padding:14px 12px 70px}header.top h1{font-size:15px}.qtext{font-size:15.5px}.opt{font-size:14.3px;padding:12px}.grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}.set-card{padding:13px}.set-card .num{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">JC</div>
+    <div><h1>JAMB Commerce — Most Repeated Questions</h1><p>700 past questions • 10 sets • 1982 – 2024</p></div>
+  </header>
+
+  <section id="home">
+    <div class="section-title"><span>Choose a Set</span><span id="totalInfo">700 Questions</span></div>
+    <div class="grid" id="setGrid"></div>
+    <p style="color:var(--muted);font-size:13px;margin-top:18px;text-align:center">Tap a set to begin. Options are mixed each time • ★ year badge shows when it appeared.</p>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="quizbar">
+      <button class="btn ghost" id="backBtn">← Sets</button>
+      <span class="pill" id="setLabel">Set 1</span>
+      <span class="pill" id="qCounter">Q 1 / 70</span>
+      <span class="pill" id="liveScore" style="margin-left:auto">Score: 0</span>
+    </div>
+    <div class="track"><i id="progressFill"></i></div>
+    <div class="qcard">
+      <div class="meta"><span class="pill year" id="yearBadge">JAMB 1983</span></div>
+      <p class="qtext" id="qText"></p>
+      <div class="opts" id="opts"></div>
+      <div id="explainBox"></div>
+    </div>
+    <div class="nav">
+      <button class="btn" id="prevBtn">← Previous</button>
+      <button class="btn primary" id="nextBtn">Next →</button>
+    </div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="result">
+      <div class="score-ring" id="ring"><span id="ringTxt">0%</span></div>
+      <h2 id="resTitle">Set Complete!</h2>
+      <p id="resText"></p>
+      <div class="nav">
+        <button class="btn" id="reviewBtn">Review Answers</button>
+        <button class="btn primary" id="retryBtn">Retry Set</button>
+        <button class="btn ghost" id="homeBtn">All Sets</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const RAW = `
+1983|The primary sector of an economy includes|banking|mining|manufacturing|insurance|B|Mining extracts raw materials, so it is a primary-sector activity.
+1985|Occupation concerned with extracting raw materials from nature is|tertiary|secondary|primary|quaternary|C|Primary occupations extract raw materials directly from nature.
+1988|Which is a secondary occupation?|Fishing|Farming|Banking|Baking|D|Baking processes raw materials into finished goods, so it is secondary.
+1990|Aids to trade include all except|banking|insurance|advertising|mining|D|Mining is production/extraction, not an aid to trade.
+1992|Making goods available at the right time and place is|production|distribution|consumption|extraction|B|Distribution makes goods available at the right time and place.
+1994|Which is NOT a factor of production?|Land|Labour|Money|Capital|C|Money is a medium of exchange, not a factor of production.
+1995|The reward for capital is|rent|wages|interest|profit|C|Capital earns interest as its reward.
+1996|The reward for entrepreneurship is|profit|interest|rent|salary|A|Entrepreneurship is rewarded with profit.
+1997|The reward for land is|interest|rent|wages|profit|B|Land earns rent as its reward.
+1998|The reward for labour is|rent|profit|wages|interest|C|Labour is rewarded with wages/salaries.
+1999|Production is complete when|goods are manufactured|goods reach the final consumer|raw materials are extracted|goods are stored|B|Production is complete only when goods reach the consumer.
+2000|The stage involving extraction of raw materials is|primary|secondary|tertiary|constructive|A|Extraction of raw materials is the primary stage of production.
+2001|Which is a direct service?|Teaching|Banking|Insurance|Transport|A|Teaching is a direct personal service.
+2002|Commercial services include all except|banking|insurance|teaching|advertising|C|Teaching is a direct service, not a commercial service.
+2003|Division of labour is limited by|size of the market|taxation|interest rate|cost of production|A|Division of labour is limited mainly by the extent of the market.
+2004|The main advantage of division of labour is|unemployment|increased output|monotony|loss of skill|B|Division of labour raises productivity and output.
+2005|Specialisation is a consequence of|inflation|division of labour|taxation|hoarding|B|Specialisation arises from dividing work into tasks.
+2006|Exchange of goods within the same country is|foreign trade|home trade|entrepot trade|barter|B|Home trade is exchange within the same country.
+2007|An economy controlled by the state is|capitalist|socialist|mixed|traditional|B|A socialist economy is controlled mainly by the state.
+2008|A mixed economy is one in which|only government produces|only individuals produce|both government and individuals produce|no production occurs|C|A mixed economy combines public and private production.
+2009|Which is NOT a feature of a developing economy?|Low per capita income|High illiteracy|Advanced technology|Dominance of agriculture|C|Advanced technology is not a typical feature of developing economies.
+2010|The tertiary sector is concerned with|extraction|manufacturing|provision of services|agriculture|C|The tertiary sector provides services.
+2011|The factor that coordinates other factors is|land|labour|capital|entrepreneur|D|The entrepreneur coordinates land, labour and capital.
+2012|Which is a renewable resource?|Coal|Crude oil|Forest|Natural gas|C|Forests are renewable if properly managed.
+2013|Turning raw materials into finished goods is|extraction|manufacturing|distribution|consumption|B|Manufacturing turns raw materials into finished goods.
+2014|A feature of labour as a factor of production is that it is|fixed|inseparable from the labourer|unlimited|indestructible|B|Labour cannot be separated from the worker.
+2015|The reward for entrepreneurship is|rent|wages|profit|interest|C|Entrepreneurship earns profit.
+2016|Utility is created when goods|are produced|satisfy a want|are stored|are advertised|B|Utility is created when goods satisfy human wants.
+2017|The utility created by transportation is|form|place|time|possession|B|Transport moves goods to where they are needed.
+2018|Warehousing creates|form utility|place utility|time utility|possession utility|C|Warehousing keeps goods until they are needed.
+2019|Which is a direct service?|Banking|Insurance|Teaching|Transport|C|Teaching is a direct service to consumers.
+2020|The reward for labour in a company is|dividend|wages|rent|interest|B|Labour in a company is rewarded with wages.
+2021|Which of the following is a factor of production?|Money|Capital|Cheque|Shares|B|Capital is a factor of production; money/cheques/shares are not.
+2022|The process of increasing the usefulness of goods is|production|consumption|exchange|taxation|A|Production increases the usefulness of goods.
+2023|Occupations that provide services to consumers are|primary|secondary|tertiary|extractive|C|Tertiary occupations provide services.
+2024|Which is a primary occupation?|Mining|Banking|Insurance|Teaching|A|Mining is a primary/extractive occupation.
+1984|The market for labour is determined by|demand for and supply of labour|taxation|interest rate|advertising|A|Labour market price is determined by demand and supply.
+1986|A machine used in production is classified as|land|labour|capital|entrepreneurship|C|A machine used in production is capital.
+1987|An economy that relies on custom is|traditional|socialist|capitalist|mixed|A|A traditional economy relies on custom and habit.
+1989|The main feature of a capitalist economy is|private ownership of the means of production|state ownership|communal ownership|no ownership|A|Capitalism is marked by private ownership.
+1982|Home trade is divided into|import and export|wholesale and retail|barter and cash|credit and cash|B|Home trade is divided into wholesale and retail trade.
+1984|A wholesaler links|producer and consumer|producer and retailer|retailer and consumer|producer and government|B|A wholesaler links producers with retailers.
+1986|A function of the wholesaler is|selling in small quantities|breaking bulk|giving credit to consumers|producing goods|B|Wholesalers break bulk into smaller quantities.
+1987|The retailer's main function is to|break bulk further|manufacture goods|store goods in bulk|import goods|A|Retailers break bulk further for consumers.
+1989|A retailer who sells on credit offers|trade discount|cash discount|consumer credit|commission|C|Selling on credit to consumers offers consumer credit.
+1991|The channel with the fewest intermediaries is|producer-wholesaler-retailer-consumer|producer-retailer-consumer|producer-agent-wholesaler-retailer-consumer|producer-consumer-wholesaler|B|This channel has the fewest intermediaries.
+1993|A person who buys goods for personal use is|a retailer|a consumer|a wholesaler|an agent|B|A consumer buys goods for personal use.
+1996|Itinerant traders are those who|have fixed shops|move from place to place|import goods|export goods|B|Itinerant traders move around selling.
+1997|A market where goods are sold directly to consumers is|commodity market|money market|retail market|capital market|C|Retail markets sell directly to final consumers.
+1998|A cooperative society is owned by|government|one person|its members|shareholders|C|A cooperative is owned and controlled by members.
+1999|The two main types of cooperative societies are|producer and consumer|import and export|wholesale and retail|cash and credit|A|The two main types are producer and consumer cooperatives.
+2000|A supermarket is a|multiple shop|department store|large-scale retailer|wholesale outlet|C|A supermarket is a large-scale retail outlet.
+2001|A department store deals in|one line of goods|many lines of goods under one roof|only imported goods|only food|B|A department store sells many product lines.
+2002|A chain store is also known as|department store|multiple shop|supermarket|mail order house|B|A chain store is also called a multiple shop.
+2003|Mail order business is conducted through|personal selling|post and courier|hawking|vending machines|B|Mail order business is conducted through post/courier.
+2004|A vending machine is a form of|wholesale trade|automatic retailing|foreign trade|cooperative trading|B|Vending machines are a form of automatic retailing.
+2005|A merchant wholesaler|takes no title to goods|takes title to goods|earns only commission|bears no risk|B|A merchant wholesaler takes title to the goods.
+2006|An agent who sells goods on behalf of another is a|broker|factor|commission agent|del credere agent|C|A commission agent sells for another and earns commission.
+2007|A broker earns|profit|commission|salary|dividend|B|A broker earns commission on transactions.
+2008|A del credere agent|guarantees payment by buyers|sells only on credit|buys in bulk|transports goods|A|A del credere agent guarantees buyer payment.
+2009|The document sent by a seller requesting payment is|invoice|receipt|credit note|debit note|A|An invoice requests payment from the buyer.
+2010|A document acknowledging payment is|invoice|receipt|order|quotation|B|A receipt acknowledges payment.
+2011|A credit note is sent when|goods are returned|payment is made|goods are delivered|an order is placed|A|A credit note is issued when goods are returned.
+2012|A debit note is issued when|the buyer is undercharged|goods are returned|payment is delayed|discount is given|A|A debit note is issued when the buyer is undercharged.
+2013|A pro-forma invoice is used to|demand payment|show what goods would cost|acknowledge payment|return goods|B|A pro-forma invoice shows proposed cost/terms.
+2014|The document showing terms of sale and details of goods is|receipt|invoice|cheque|bill of lading|B|An invoice shows terms of sale and details of goods.
+2015|A trade discount is given|for prompt payment|on list price for bulk purchase|to employees|on returned goods|B|Trade discount is given on list price for bulk buying.
+2016|A cash discount encourages|bulk purchase|prompt payment|returned goods|advertising|B|Cash discount encourages early payment.
+2017|E. & O.E. on an invoice means|early order expected|every order entered|errors and omissions excepted|expenses and other estimates|C|E.&O.E. means errors and omissions excepted.
+2018|A quotation is sent in response to|a receipt|an invoice|a credit note|an inquiry|D|A quotation is sent in response to an inquiry.
+2019|A delivery note accompanies|payment|goods being delivered|a quotation|an inquiry|B|A delivery note accompanies goods.
+2020|The consignor is the person who|receives goods|transports goods|sends goods|insures goods|C|The consignor sends the goods.
+2021|The consignee is the person who|sends goods|sells goods|produces goods|receives goods|D|The consignee receives the goods.
+2022|A statement of account shows|one transaction only|the position of a customer's account|returned goods|ordered goods|B|A statement of account shows account position.
+2023|A petty cash book records|large payments|bank deposits|small expenses|sales|C|A petty cash book records small expenses.
+2024|The imprest system is used for|bank loans|insurance|advertising|petty cash|D|The imprest system is used for petty cash.
+1985|A market stall is an example of|large-scale retailing|small-scale retailing|wholesaling|foreign trade|B|A market stall is a small retail outlet.
+1990|Hawking is a form of|retail trade|wholesale trade|foreign trade|banking|A|Hawking is a form of retail trade.
+1994|The main aim of a trade association is to|fix wages|collect taxes|protect members' interests|issue currency|C|Trade associations protect members' interests.
+2000|A commodity exchange deals in|shares|currency|labour|raw materials|D|Commodity exchanges deal in raw materials.
+1985|Foreign trade comprises|import and export trade|wholesale and retail|home trade|barter|A|Foreign trade comprises imports and exports.
+1988|Trade between Nigeria and Ghana is|home trade|bilateral trade|entrepot trade|internal trade|B|Trade between two countries is bilateral.
+1990|Importing goods for re-export is|entrepot trade|visible trade|invisible trade|balance of trade|A|Importing for re-export is entrepot trade.
+1992|Invisible trade is trade in|goods|services|raw materials|machinery|B|Invisible trade is trade in services.
+1994|The difference between visible exports and visible imports is|balance of payments|balance of trade|terms of trade|national income|B|Visible exports minus visible imports is balance of trade.
+1995|A country has an unfavourable balance of trade when|exports exceed imports|imports exceed exports|exports equal imports|no trade occurs|B|That gives an unfavourable balance of trade.
+1996|Balance of payments includes|visible trade only|invisible trade only|both visible and invisible trade|only capital transfers|C|Balance of payments includes visible and invisible items.
+1997|A document listing a ship's cargo is|manifest|bill of lading|certificate of origin|invoice|A|A manifest lists a ship's cargo.
+1998|The shipowner's acknowledgement of goods received for shipment is|bill of exchange|bill of lading|consular invoice|freight note|B|The bill of lading acknowledges goods received for shipment.
+1999|A certificate of origin shows|where goods were manufactured|the value of goods|the ship used|the insurance cover|A|A certificate of origin shows origin.
+2000|A bill of exchange is drawn by|the importer|the exporter|the shipowner|the bank|B|A bill of exchange is usually drawn by the exporter.
+2001|The person on whom a bill of exchange is drawn is the|drawer|drawee|payee|endorser|B|The drawee is the person on whom the bill is drawn.
+2002|An importer needing foreign currency applies to|an insurance company|a commercial bank|a cooperative society|customs|B|Importers apply to commercial banks for foreign exchange.
+2003|Customs duty is levied on|exports|imports|local goods|services|B|Customs duty is levied mainly on imports.
+2004|An embargo is|a tax on imports|a total ban on trade|a subsidy|a quota|B|An embargo is a complete trade ban.
+2005|A quota is|a tax|a limit on quantity imported|a subsidy|a licence|B|A quota limits import quantity.
+2006|Tariffs are imposed mainly to|encourage imports|protect local industries|reduce exports|increase consumption|B|Tariffs protect domestic industries.
+2007|Dumping is|selling goods abroad below cost|buying cheaply|hoarding|exporting raw materials|A|Dumping is selling abroad below cost.
+2008|The main aim of ECOWAS is to|promote economic integration|fight wars|issue currency|control prices|A|ECOWAS aims at regional economic integration.
+2009|The African Development Bank is located in|Lagos|Abidjan|Accra|Cairo|B|The African Development Bank is headquartered in Abidjan.
+2010|The IMF was established to|give development loans|promote monetary cooperation|regulate trade|provide insurance|B|The IMF promotes international monetary cooperation.
+2011|IBRD stands for|International Bank for Reconstruction and Development|International Board of Rural Development|International Bureau for Regional Development|International Bank for Research and Development|A|IBRD stands for International Bank for Reconstruction and Development.
+2012|The WTO replaced|GATT|IMF|ECOWAS|OPEC|A|The WTO replaced GATT.
+2013|OPEC is an organisation of countries exporting|cocoa|crude oil|coffee|cotton|B|OPEC is an organisation of crude-oil exporting countries.
+2014|The main purpose of a trade fair is to|sell cheaply|display goods to attract buyers|hoard goods|fix prices|B|Trade fairs display goods to attract buyers.
+2015|An indent is|an order for goods from abroad|a receipt|an invoice|a discount|A|An indent is an overseas order for goods.
+2016|A country's terms of trade are favourable when|export prices rise relative to import prices|import prices rise|exports equal imports|no trade occurs|A|That makes terms of trade favourable.
+2017|Foreign exchange reserves are held by|the central bank|commercial banks|individuals|insurance companies|A|Foreign exchange reserves are held by the central bank.
+2018|A tariff is|a tax on imported goods|a subsidy|a quota|an embargo|A|A tariff is a tax on imports.
+2019|The body that promotes Nigeria's exports is|NAFDAC|NDIC|SEC|Nigerian Export Promotion Council|D|NEPC promotes Nigeria's exports.
+1987|A cheque is|a bill of exchange drawn on a banker payable on demand|a promissory note|a receipt|a credit note|A|That is the definition of a cheque.
+1989|A crossed cheque|must be cashed at the counter|must be paid into an account|is invalid|is endorsed|B|A crossed cheque must be paid into an account.
+1991|An open cheque|can be cashed over the counter|has two lines across it|is post-dated|is dishonoured|A|An open cheque can be cashed at the counter.
+1993|A cheque returned unpaid is said to be|cashed|dishonoured|endorsed|crossed|B|A returned unpaid cheque is dishonoured.
+1995|The drawer of a cheque is|the bank|the account holder|the payee|the endorser|B|The drawer is the account holder who writes the cheque.
+1996|A stale cheque is one that is|post-dated|over six months old|signed by two people|crossed|B|A stale cheque is over six months old.
+1997|The bank on which a cheque is drawn is the|collecting bank|paying bank|merchant bank|central bank|B|The bank on which a cheque is drawn is the paying bank.
+1998|The Central Bank of Nigeria was established in|1958|1959|1960|1962|B|The CBN was established in 1959.
+1999|One function of the Central Bank is to|accept deposits from the public|issue currency|lend to individuals|sell goods|B|Currency issuance is a CBN function.
+2000|The lender of last resort is the|commercial bank|merchant bank|central bank|development bank|C|The central bank is lender of last resort.
+2001|Commercial banks earn profit mainly from|interest on loans|donations|taxes|subsidies|A|Commercial banks earn mainly from interest on loans.
+2002|A current account is operated with|a passbook|a cheque book|a deposit slip only|no document|B|A current account is operated with a cheque book.
+2003|A savings account holder is issued|a cheque book|a passbook|a share certificate|a debenture|B|Savings account holders are issued passbooks.
+2004|Reconciling a bank statement with a cash book is|balancing|bank reconciliation|budgeting|posting|B|Reconciling bank statement and cash book is bank reconciliation.
+2005|A standing order instructs a bank to|pay a fixed sum regularly|open an account|close an account|issue a cheque|A|A standing order pays a fixed sum regularly.
+2006|A direct debit authorises the bank to|pay variable amounts on demand to a creditor|pay a fixed monthly sum|lend money|grant an overdraft|A|That is a direct debit.
+2007|An overdraft is|a long-term loan|a short-term loan on current account|a fixed deposit|a share|B|An overdraft is short-term borrowing on current account.
+2008|The money market deals in|long-term funds|short-term funds|land|goods|B|The money market deals in short-term funds.
+2009|The capital market deals in|short-term funds|long-term funds|consumer goods|raw materials|B|The capital market deals in long-term funds.
+2010|The Nigerian Stock Exchange is a market for|shares and stocks|goods|foreign exchange|labour|A|The stock exchange trades shares and stocks.
+2011|A shareholder is a|creditor|debtor|part owner|employee|C|A shareholder is a part owner of the company.
+2012|A debenture is a|share|loan to a company|dividend|tax|B|A debenture is a loan to a company.
+2013|The value written on a share certificate is the|market value|nominal value|book value|real value|B|The value written on a share certificate is nominal value.
+2014|A dividend is paid to|debenture holders|shareholders|creditors|employees|B|Dividends are paid to shareholders.
+2015|Barter requires|money|double coincidence of wants|banks|credit|B|Barter requires double coincidence of wants.
+1983|A quality of money is|perishability|portability|instability|bulkiness|B|Portability is a quality of good money.
+1986|Money as a store of value means money|is used for exchange|can be kept for future use|measures value|is a unit of account|B|Money as store of value can be saved.
+1990|Legal tender is money that|must be accepted in payment of debts|is accepted only by banks|is foreign currency|is not backed by law|A|That is legal tender.
+1994|Token money is money whose|face value exceeds intrinsic value|intrinsic value exceeds face value|value is fixed|value is zero|A|Token money has face value above material value.
+1997|Coins are token money because|they are metallic|face value exceeds metal content|they are issued by the central bank|they are durable|B|Coins are token money for that reason.
+2000|The value of money falls when|prices rise|prices fall|production rises|taxes fall|A|The value of money falls when prices rise.
+2003|Inflation is|a persistent rise in the general price level|a fall in prices|a rise in output|a fall in money supply|A|That is inflation.
+2006|Deflation is characterised by|rising prices|falling prices|rising wages|rising demand|B|Deflation is characterised by falling prices.
+2009|Holding money for day-to-day transactions is the|precautionary motive|speculative motive|transaction motive|asset motive|C|Money held for day-to-day transactions is transaction motive.
+2012|Holding money for unforeseen events is the|transaction motive|precautionary motive|speculative motive|investment motive|B|Money held for unforeseen events is precautionary motive.
+2015|Which is NOT a function of money?|Medium of exchange|Unit of account|Store of value|Production of goods|D|Producing goods is not a function of money.
+2016|The central bank controls money supply mainly through|open market operations|advertising|taxation|price control|A|The CBN controls money supply mainly via open market operations.
+2017|An increase in the cash ratio of banks will|increase money supply|reduce money supply|have no effect|increase lending|B|A higher cash ratio reduces banks' lending and money supply.
+2018|A bank note is an example of|commodity money|token money|representative money|near money|B|A bank note is token money.
+2019|Near money includes|coins|treasury bills|bank notes|currency|B|Treasury bills are near money.
+1984|The principle requiring full disclosure is|indemnity|utmost good faith|subrogation|contribution|B|Full disclosure is the principle of utmost good faith.
+1988|The principle that restores the insured to his original position is|indemnity|insurable interest|subrogation|contribution|A|Indemnity restores the insured to the original position.
+1991|A person taking an insurance policy must have|a bank account|insurable interest|a lawyer|a partner|B|A policyholder must have insurable interest.
+1994|Transfer of the insured's right of recovery to the insurer is|subrogation|contribution|indemnity|proximate cause|A|Subrogation transfers recovery rights to the insurer.
+1997|When two insurers share a loss it is the principle of|subrogation|contribution|indemnity|abandonment|B|Contribution applies when insurers share a loss.
+2000|Life assurance differs from other insurance because it is|a contract of indemnity|not a contract of indemnity|illegal|not beneficial|B|Life assurance is not a contract of indemnity.
+2003|The amount paid regularly for an insurance policy is the|premium|claim|sum assured|dividend|A|The regular payment for insurance is premium.
+2006|Marine insurance covers|ships and cargo|fire|life|motor vehicles|A|Marine insurance covers ships and cargo.
+2009|Fidelity insurance covers|loss from dishonest employees|fire|death|accident|A|Fidelity insurance covers dishonest employee loss.
+2012|A policy covering third parties against injury by a motor vehicle is|comprehensive|third party|fire|marine|B|Third-party motor insurance covers injury to others.
+2015|Reinsurance is the insurance of|the insured|an insurer by another insurer|goods|property|B|Reinsurance is insurance of insurers.
+2018|An actuary is concerned with|calculating premiums and risks|selling policies|paying claims|auditing|A|An actuary calculates premiums and risks.
+2021|The principle that the insured cannot profit from a loss is|indemnity|subrogation|contribution|proximate cause|A|Indemnity prevents the insured from profiting from loss.
+2022|The document issued by an insurer stating the terms of cover is|policy|premium|claim|receipt|A|The policy states the terms of insurance cover.
+2023|Insurance is a means of|transferring risk|avoiding risk|increasing risk|creating risk|A|Insurance transfers risk to the insurer.
+2024|All are principles of insurance except|insurable interest|particular average|utmost good faith|subrogation|B|Particular average is not a principle of insurance.
+2010|The person whose life is insured is the|insurer|policy holder|beneficiary|actuary|B|The person whose life is insured is the policyholder.
+2007|The sum assured is|the premium|the profit|the amount payable on the insured event|the commission|C|The amount payable on the insured event.
+2004|Fire insurance covers|death|theft only|marine losses|damage by fire|D|Fire insurance covers fire damage.
+2001|Burglary insurance covers|fire|loss from theft|death|accident|B|Burglary insurance covers theft loss.
+1998|Accident insurance covers|fire|marine losses|theft|personal injury|D|Accident insurance covers personal injury.
+1995|The insured is the person who|takes out the policy|sells the policy|calculates the premium|pays the claim|A|The insured takes out the policy.
+1992|A claim is|a premium|a demand for payment of a loss|a policy|a commission|B|A claim is a demand for loss payment.
+1989|Insurance companies are examples of|manufacturers|retailers|financial institutions|cooperatives|C|Insurance companies are financial institutions.
+1986|The main function of insurance is to|increase risk|create risk|avoid risk|spread risk|D|Insurance spreads risk among many.
+1996|Advertising is|any paid form of non-personal presentation of goods|personal selling|sales promotion|public relations|A|That is advertising.
+1999|Advertising aimed at increasing sales of a particular brand is|informative|persuasive|reminder|generic|B|Brand advertising is persuasive.
+2002|The medium reaching the largest audience is|television|radio|newspaper|magazine|A|Television reaches the largest audience.
+2005|A poster is a form of|outdoor advertising|personal selling|publicity|sales promotion|A|A poster is outdoor advertising.
+2008|A trade mark is|a sign identifying a product|a price tag|a discount|an advert|A|A trademark identifies a product.
+2011|Publicity differs from advertising because it is|paid for|not paid for by the sponsor|always personal|always on television|B|Publicity is not paid for by the sponsor.
+2014|Personal selling involves|face-to-face contact with the buyer|radio adverts|posters|newspapers|A|That is personal selling.
+2017|Communication is the transmission of|goods|information|money|people|B|Communication is transmission of information.
+1986|The feedback element in communication is|the sender|the receiver's response|the medium|the message|B|Feedback is the receiver's response.
+1989|A memorandum is used for|internal communication|external advertising|payment|insurance|A|A memorandum is used internally.
+1992|The fastest means of transmitting a written message is|letter|telegram|e-mail|courier|C|E-mail is the fastest written message medium listed.
+1995|Postal and money orders are services of|banks|the post office|insurance companies|cooperatives|B|Postal/money orders are post office services.
+1998|Courier services handle|documents and parcels|banking|insurance|advertising|A|Courier services handle documents and parcels.
+2001|The mode most suitable for bulky goods over long distances is|air|rail|road|pipeline|B|Rail is suitable for bulky goods over long distances.
+2004|Pipeline transport is mainly used for|passengers|petroleum products|solid goods|containers|B|Pipelines mainly carry petroleum products.
+2007|The cheapest means of transporting bulky goods is|air|road|sea|rail|C|Sea transport is cheapest for bulky goods.
+2010|Tourism is an example of|visible trade|invisible trade|home trade|barter|B|Tourism is trade in services, hence invisible trade.
+2013|A tourist travels|to work|for pleasure|for permanent residence|to buy goods|B|A tourist travels mainly for pleasure.
+2016|Warehousing is important because it creates|time utility|waste|cost|loss|A|Warehousing creates time utility.
+2019|A bonded warehouse stores|goods on which duty has been paid|imported goods before duty is paid|local goods|perishable goods|B|A bonded warehouse stores dutiable imports.
+1985|A public warehouse is owned by|individuals|government or licensed operators|the producer|the retailer|B|Public warehouses are government/licensed.
+1988|Moving goods from producer to consumer is|production|distribution|storage|insurance|B|Moving goods to consumers is distribution.
+1991|A cold store is used for|perishable goods|machinery|textiles|building materials|A|Cold stores preserve perishables.
+1994|The document given to a passenger for a journey is a|ticket|receipt|invoice|voucher|A|A ticket is given to a passenger.
+2000|Air transport is most suitable for|bulky goods|perishable and valuable goods|coal|timber|B|Air transport suits perishable/valuable goods.
+2000|The advantage of road transport is|door-to-door delivery|cheapness for bulk|speed only|safety only|A|Road transport offers door-to-door delivery.
+2003|Communication within an organisation flows|downward, upward and horizontally|only downward|only upward|only outward|A|Communication flows in all three directions.
+2006|A barrier to effective communication is|noise|clarity|feedback|encoding|A|Noise is a barrier to effective communication.
+2009|Advertising creates|awareness|scarcity|taxes|losses|A|Advertising creates awareness.
+2012|A billboard is an example of|outdoor advertising|personal selling|sales promotion|publicity|A|A billboard is outdoor advertising.
+1991|A sole proprietorship is owned by|two persons|one person|government|shareholders|B|A sole proprietorship is owned by one person.
+1994|The main disadvantage of a sole proprietorship is|unlimited liability|shared profit|easy decision making|small capital|A|The main disadvantage is unlimited liability.
+1997|A partnership has a maximum of|10 members|20 members|25 members|unlimited members|B|An ordinary partnership has a maximum of 20 members.
+2000|In a limited partnership the number of general partners must be at least|one|two|three|five|A|A limited partnership must have at least one general partner.
+2003|Companies are incorporated under the|Companies and Allied Matters Act|Sale of Goods Act|Bill of Exchange Act|Insurance Act|A|Companies are incorporated under CAMA.
+2006|A private limited company has a maximum of|50 members|20 members|unlimited members|10 members|A|A private limited company has a maximum of 50 members.
+2009|The document stating a company's objects is the|memorandum of association|articles of association|prospectus|certificate of incorporation|A|The memorandum states the company's objects.
+2012|The document governing a company's internal management is the|memorandum|articles of association|prospectus|statutory declaration|B|The articles govern internal management.
+2015|A public limited company must have a minimum of|2 members|7 members|20 members|50 members|B|A public limited company needs at least 7 members.
+2018|Shares of a public limited company are|not transferable|freely transferable|sold only to government|sold only to employees|B|Public company shares are freely transferable.
+1990|A cooperative society is established mainly to|make profit|promote members' economic welfare|pay taxes|compete with government|B|Cooperatives promote members' welfare.
+1993|A public corporation is established by|an act of parliament|a private agreement|a contract|a partnership deed|A|A public corporation is established by statute.
+1996|The main aim of a public corporation is to|maximise profit|provide essential services|pay dividends|compete with private firms|B|Public corporations mainly provide essential services.
+1999|Selling government enterprises to private individuals is|privatisation|nationalisation|commercialisation|incorporation|A|Selling government enterprises is privatisation.
+2002|Commercialisation means|sale of government firms|making public enterprises profit-oriented|nationalisation|forming companies|B|That is commercialisation.
+2005|A holding company|controls other companies through shares|is controlled by another|has no shares|is owned by government|A|A holding company controls subsidiaries via shares.
+2008|A subsidiary company is|controlled by a holding company|independent|owned by government|a partnership|A|A subsidiary is controlled by a holding company.
+2011|The business organisation with perpetual succession is|sole proprietorship|partnership|limited liability company|joint venture|C|A company has perpetual succession.
+2014|A joint venture is|a partnership for a specific project|a company|a cooperative|a public corporation|A|A joint venture is for a specific project.
+2017|Business resources include all except|human|financial|material|weather|D|Weather is not a business resource.
+2020|A company owned and controlled by government is a|public corporation|private company|partnership|cooperative|A|A government-owned company is a public corporation.
+2021|A sole trader's liability is|unlimited|limited|shared|none|A|A sole trader has unlimited liability.
+2022|A cooperative that sells members' produce is a|producer cooperative|consumer cooperative|credit cooperative|thrift society|A|It sells members' produce.
+2023|A thrift and credit society is a type of|cooperative society|public corporation|limited company|partnership|A|A thrift and credit society is a cooperative.
+2024|The maximum number of members in an ordinary partnership is|10|20|25|50|B|Ordinary partnership maximum is 20.
+1984|A partnership deed contains|the terms of the partnership|the profit only|the tax|the insurance|A|A partnership deed contains the terms.
+1987|In a partnership, a dormant partner|contributes capital but takes no active part|manages the business|provides no capital|is a creditor|A|That is a dormant partner.
+1990|A company is|a legal person separate from its owners|a partnership|a sole proprietorship|a cooperative|A|A company is a separate legal person.
+1993|The certificate of incorporation gives a company|legal existence|capital|profit|staff|A|Incorporation gives the company legal existence.
+1996|A prospectus is issued to|invite the public to buy shares|state the objects|regulate internal affairs|pay dividends|A|A prospectus invites share subscriptions.
+1999|The liability of shareholders in a limited company is limited to|the amount unpaid on their shares|their personal property|the company's debts|nothing|A|Shareholder liability is limited to unpaid share amounts.
+2002|Preference shareholders receive|fixed dividends before ordinary shareholders|variable dividends|no dividend|only capital|A|Preference shareholders get fixed dividends first.
+2005|Ordinary shareholders are paid|after preference shareholders|before them|instead of them|never|A|Ordinary shareholders are paid after preference holders.
+2008|A company's annual general meeting is held to|present accounts to shareholders|employ staff|buy goods|pay taxes|A|The AGM presents accounts to shareholders.
+2011|A cooperative society is controlled by|its members on a democratic basis|government|one person|shareholders|A|Cooperatives are democratically controlled by members.
+1987|Management is|employing workers|buying goods|getting things done through people|selling goods|C|Management is getting things done through people.
+1990|Planning involves|directing staff|setting objectives and deciding how to achieve them|checking performance|employing staff|B|That is planning.
+1993|Organising involves|controlling|leading|budgeting|grouping activities and assigning duties|D|That is organising.
+1996|Staffing is concerned with|recruitment and training|production|marketing|finance|A|Staffing deals with recruitment/training.
+1999|Directing involves|planning|budgeting|guiding and supervising subordinates|auditing|C|Directing involves guiding subordinates.
+2002|Controlling involves|setting objectives|measuring performance against standards|hiring staff|buying materials|B|Controlling compares performance with standards.
+2005|Span of control means the|number of managers|level of authority|chain of command|number of subordinates under one manager|D|That is span of control.
+2008|Unity of command means a subordinate receives orders from|many superiors|one superior only|two superiors|no superior|B|Unity of command means one superior.
+2011|Delegation of authority means|giving up responsibility|assigning duties and power to subordinates|employing staff|controlling staff|B|That is delegation.
+2014|The chain of command is|a set of rules|a committee|the line of authority from top to bottom|a budget|C|That is chain of command.
+2017|A manager responsible for the whole organisation is a|middle manager|supervisor|foreman|top-level manager|D|A manager responsible for the whole organisation is top-level.
+2020|Motivating workers is a function of|planning|leading|controlling|organising|B|Motivating workers is part of leading.
+2021|A business plan is|a bank statement|an invoice|a written description of a business and its future direction|a receipt|C|That is a business plan.
+2022|Small-scale businesses are characterised by|large capital|small capital and few employees|many branches|government ownership|B|Small-scale businesses have small capital/few staff.
+2023|Sources of business finance include all except|personal savings|bank loans|trade credit|tax evasion|D|Tax evasion is not a legitimate finance source.
+2024|Trade credit is|a bank loan|credit given by a supplier of goods|a loan from friends|hire purchase|B|That is trade credit.
+2010|Hire purchase allows the buyer to|hire goods briefly|buy without payment|pay in instalments and own the goods after final payment|return goods anytime|C|That is hire purchase.
+2013|Leasing involves|buying an asset|renting an asset for a period|selling an asset|hiring staff|B|Leasing is renting an asset.
+2016|A lease is an agreement between|buyer and seller|bank and customer|insurer and insured|lessor and lessee|D|A lease is between lessor and lessee.
+2019|A budget is|a bank statement|an invoice|a receipt|a plan of income and expenditure|D|That is a budget.
+2007|A business breaks even when|revenue exceeds cost|total revenue equals total cost|cost exceeds revenue|there is no cost|B|That is break-even.
+2004|Fixed costs|do not vary with output|vary with output|are total costs|are marginal costs|A|Fixed costs do not vary with output.
+2001|Variable costs include|rent|insurance|raw materials|permanent salaries|C|Raw materials are variable costs.
+1998|Profit is|cost minus revenue|total revenue|total cost|revenue minus cost|D|Profit is revenue minus cost.
+1995|Entrepreneurship involves|only capital|risk bearing and innovation|only labour|only land|B|Entrepreneurship involves risk and innovation.
+1984|Marketing is concerned with|producing goods|identifying and satisfying consumer needs profitably|storing goods|transporting goods|B|That is marketing.
+1988|The marketing mix consists of|land, labour, capital, entrepreneur|product, price, place, promotion|planning, organising, staffing, controlling|buying, selling, storage, transport|B|That is the marketing mix.
+1992|Market segmentation is the division of a market into|regions|products|distinct groups of buyers|prices|C|Segmentation divides buyers into distinct groups.
+1996|A product's life cycle consists of|buying and selling|production only|advertising only|introduction, growth, maturity, decline|D|That is the product life cycle.
+2000|The four Ps of marketing are|product, price, place, promotion|people, process, product, price|price, profit, place, people|product, profit, plan, promotion|A|The four Ps are these.
+2004|Consumer protection is the responsibility of|the World Bank|the Standards Organisation of Nigeria|OPEC|the IMF|B|SON handles product standards.
+2008|The Consumer Protection Council was established to|increase prices|protect consumers against substandard goods|regulate banks|collect taxes|B|That is the CPC's role.
+2012|NAFDAC regulates|standards of goods|consumer credit|food and drug products|transport|C|NAFDAC regulates food and drugs.
+2016|The business environment includes|only competitors|only customers|only government|economic, social, political and legal factors|D|These make up the business environment.
+2019|A business is socially responsible when it|maximises profit only|contributes to community welfare|pays taxes|employs workers|B|Social responsibility includes community welfare.
+1983|Commerce is the study of|only banking|only insurance|trade and aids to trade|only production|C|Commerce is trade plus aids to trade.
+1986|The two broad divisions of commerce are|home and foreign trade|trade and aids to trade|banking and insurance|import and export|B|These are the two broad divisions.
+1989|Aids to trade|hinder trade|facilitate trade|replace trade|stop trade|B|Aids to trade facilitate trade.
+1993|A patent protects|a brand name|a logo|a service|an invention|D|A patent protects an invention.
+1997|Copyright protects|inventions|literary and artistic works|brand names|goods|B|Copyright protects literary/artistic works.
+2001|The Standards Organisation of Nigeria|regulates banks|sets standards for goods|collects taxes|regulates drugs|B|SON sets product standards.
+2005|Ethics in business refers to|profit|law|moral principles guiding business conduct|tax|C|That is business ethics.
+2009|A business environment that includes competitors is the|internal environment|political environment|legal environment|task environment|D|Competitors are part of the task environment.
+2013|Social responsibility of business includes|profit maximisation only|environmental protection|tax evasion|hoarding|B|That is part of social responsibility.
+2017|Consumerism is|the study of consumers|consumer spending|the movement to protect consumer interests|consumer credit|C|That is consumerism.
+1994|The main source of government revenue from business is|donations|taxation|loans|grants|B|Taxation is the main government revenue source from business.
+2000|A surplus budget occurs when|expenditure exceeds revenue|revenue equals expenditure|revenue exceeds expenditure|there is no revenue|C|That is a surplus budget.
+2003|A deficit budget is financed by|taxation only|savings only|selling assets only|borrowing|D|Deficit budgets are financed by borrowing.
+2006|GDP measures|total imports|total value of goods and services produced within a country|total exports|total savings|B|That is GDP.
+2009|Per capita income is|total income|national income divided by population|total population|total savings|B|That is per capita income.
+2012|Foreign investment is encouraged by|high taxes|insecurity|favourable government policies|poor infrastructure|C|These encourage foreign investment.
+2015|The main problem of industrialisation in Nigeria is|excess capital|high technology|surplus labour|inadequate infrastructure|D|It is a major industrialisation problem.
+2018|The Securities and Exchange Commission regulates|banks|the capital market|food|insurance|B|SEC regulates the capital market.
+2021|The Nigerian Communications Commission regulates|banks|insurance|food|telecommunications|D|NCC regulates telecommunications.
+2022|The Nigerian Postal Service provides|banking|postal and courier services|insurance|transport|B|NIPOST provides postal/courier services.
+2023|E-commerce refers to|banking|buying and selling over the internet|insurance|transport|B|That is e-commerce.
+2024|A disadvantage of e-commerce is|wider market|convenience|security risks|lower cost|C|Security risk is an e-commerce disadvantage.
+2024|The use of ATMs is an example of|insurance|advertising|warehousing|electronic banking|D|ATMs are e-banking.
+2024|The main objective of a business organisation is to|pay taxes|maximise profit|employ workers|donate to charity|B|Profit maximisation is the main business objective.
+2024|A factor affecting the location of an industry is|weather|nearness to raw materials|population growth|taxation|B|It affects industrial location.
+1984|Gresham's law states that|good money drives out bad money|bad money drives out good money|money is neutral|money is a store of value|B|That is Gresham's law.
+1986|An unconditional promise in writing to pay a sum of money is a|cheque|bill of exchange|receipt|promissory note|D|It is an unconditional written promise to pay.
+1988|An IOU is|a negotiable instrument|legal tender|a formal acknowledgement of debt without legal force|a bank draft|C|That is an IOU.
+1990|A bank draft is drawn by|an individual|a bank on another bank|the central bank only|a company|B|A bank draft is drawn by a bank on another bank.
+1992|A traveller's cheque is convenient because it is|not refundable|payable only in the issuing country|acceptable abroad and refundable if lost|not negotiable|C|Traveller's cheques have these advantages.
+1994|A credit card enables the holder to|withdraw only cash|buy now and pay later|open a savings account|insure goods|B|Credit cards allow deferred payment.
+1996|A debit card differs from a credit card because it|gives credit|is not accepted in shops|deducts directly from the holder's account|is issued only by government|C|Debit cards deduct directly.
+1998|An ATM is used for|self-service cash withdrawal|insuring goods|advertising|warehousing|A|ATMs are for self-service cash.
+2000|Writing a person's name on the back of a cheque is called|crossing|endorsement|discounting|opening|B|Writing a name on the back of a cheque is endorsement.
+2002|The body that settles cheques among commercial banks is the|stock exchange|clearing house|insurance company|treasury|B|The clearing house settles cheques among banks.
+2004|Merchant banks specialise in|wholesale banking and acceptance of bills|retail savings only|insurance|mortgage lending only|A|Merchant banks specialise in wholesale banking.
+2006|A development bank provides|consumer loans|medium and long-term loans for development|overdrafts to individuals|savings accounts|B|Development banks provide such loans.
+2008|A mortgage bank lends mainly for|buying land and building houses|buying cars|paying school fees|buying shares|A|Mortgage banks finance land/housing.
+2010|Microfinance banks serve mainly|large corporations|government agencies|small businesses and low-income earners|foreign investors|C|Microfinance banks serve these groups.
+2012|The NDIC protects|insurance policy holders|bank depositors|shareholders|creditors of companies|B|NDIC protects depositors.
+2014|The rate at which the central bank lends to commercial banks is the|exchange rate|bank rate|tax rate|interest rate on savings|B|The CBN lending rate to banks is bank rate.
+2016|Special deposits are used by the central bank to|increase money supply|reward banks|reduce the lending capacity of banks|pay salaries|C|Special deposits reduce bank lending.
+2018|Moral suasion as a monetary tool means|persuasion of banks to comply with policy|moral teaching|legal action|taxation|A|That is moral suasion.
+2020|The minimum fraction of deposits banks must keep as cash is the|bank rate|liquidity ratio|discount rate|exchange rate|B|It is the minimum cash fraction banks must keep.
+2021|Treasury bills are|long-term government securities|equity shares|debentures|short-term government securities|D|Treasury bills are short-term government securities.
+2022|Money lent overnight between banks is called|call money|fixed deposit|treasury bill|subsidy|A|Overnight interbank lending is call money.
+2023|A fixed deposit account attracts|no interest|higher interest than a savings account|lower interest than savings|only dividends|B|Fixed deposits attract higher interest.
+2024|A bank statement shows|the customer's account balance and transactions|the bank's profit|the customer's tax|the customer's insurance|A|A bank statement shows these.
+1991|A bank giro enables a person to|insure goods|transfer money to another account by order|buy shares|obtain a loan|B|A bank giro enables transfers.
+1993|The price of one currency in terms of another is the|bank rate|inflation rate|exchange rate|tax rate|C|It is the price of one currency in another.
+1995|A bull in the stock exchange expects share prices to|fall|remain constant|rise|be fixed|C|A bull expects share prices to rise.
+1997|A bear speculator expects prices to|fall|rise|stay fixed|double|A|A bear expects prices to fall.
+1999|A jobber on the stock exchange|buys and sells shares for himself|acts only for clients|insures shares|issues currency|A|A jobber deals for himself.
+2001|A stockbroker earns|salaries|commission on transactions|dividends|interest|B|A stockbroker earns commission.
+2003|Shares of very reputable companies are known as|penny shares|blue chips|debentures|rights|B|Shares of reputable companies are blue chips.
+2005|An offer of new shares to existing shareholders is a|bonus issue|rights issue|debenture|public offer|B|New shares offered to existing shareholders is a rights issue.
+2007|A bonus issue is made to|existing shareholders free of charge|new shareholders only|debenture holders|creditors|A|A bonus issue is free to existing shareholders.
+2009|Underwriting of shares means|buying shares at a discount|guaranteeing to buy unsold shares|writing share certificates|cancelling shares|B|Underwriting guarantees unsold shares.
+2011|Profit from selling shares at a price above cost is|dividend|capital gain|commission|interest|B|Profit from selling shares above cost is capital gain.
+2013|Preference shareholders receive|variable dividends|nothing|a fixed rate of dividend|only capital|C|Preference shareholders receive fixed dividends.
+1985|General average in marine insurance refers to|a loss shared by all parties in the venture|a loss borne by the shipowner only|a total loss|an avoidable loss|A|That is general average.
+1987|Particular average means a loss borne by|the shipowner alone|the party whose goods are damaged|all parties equally|the insurer alone|B|Particular average is borne by the affected party.
+1989|Abandonment in marine insurance occurs when|the insured gives up the ship or cargo to the insurer|the insurer refuses the claim|goods are sold|the ship sails|A|That is abandonment.
+1991|Salvage in marine insurance refers to|rescued property|insurance premium|the claim|a type of policy|A|Salvage is rescued property.
+1993|The cause nearest to a loss in an unbroken chain of events is|indemnity|subrogation|proximate cause|contribution|C|It is the nearest cause of loss.
+1995|A voyage policy covers|a specific journey|a period of time|all journeys|only cargo on land|A|A voyage policy covers a specific journey.
+1997|A floating policy is taken to cover|one shipment|several shipments over a period|only ships|only cargo|B|A floating policy covers several shipments.
+1999|Cover note in insurance is a|temporary document of cover|receipt|policy|claim form|A|A cover note is temporary cover.
+2001|Under-insurance means the insured|insured for full value|insured for less than the actual value|has no cover|insured twice|B|That is under-insurance.
+2003|Double insurance is|insuring the same risk with two or more insurers|insuring twice the value|insuring two goods|reinsurance|A|That is double insurance.
+2005|The insurer who accepts the risk is the|insured|beneficiary|underwriter|agent|C|The insurer accepting the risk is the underwriter.
+2007|Life assurance policies mature when|the insurer dies|the policy term ends or the assured dies|premiums stop|claims are filed|B|Life assurance matures then.
+2009|Endowment policies combine|insurance with investment|fire and marine|only life cover|motor and theft|A|Endowment policies combine both.
+2011|Insurance is taken out to|avoid risk entirely|eliminate profit|reduce financial loss from risk|increase risk|C|Insurance reduces financial loss.
+2013|The amount for which goods are insured is the|premium|sum insured|dividend|commission|B|The insured amount is the sum insured.
+2015|A company that accepts insurance risks is known as|broker|agent|assured|insurer|D|A company accepting insurance risks is the insurer.
+2017|Motor insurance is compulsory in Nigeria under|the Insurance Act|the Company Act|the Labour Act|the Tax Act|A|Motor insurance is compulsory under it.
+2019|An insurance broker acts for|the insurer|the insured|the government|both equally|B|An insurance broker acts for the insured.
+2021|Marine hull insurance covers|the ship|the cargo|the crew|the port|A|Marine hull insurance covers the ship.
+2023|Cargo insurance in foreign trade protects|the ship|the goods in transit|the crew|the port dues|B|Cargo insurance protects goods in transit.
+1983|A consignment note is used when|goods are sent to an agent to be sold|goods are bought|payment is made|goods are insured|A|A consignment note is used then.
+1985|A packing list accompanies|goods to show their contents|payment|the invoice only|insurance|A|A packing list shows contents.
+1987|A freight note shows|cost of transporting goods|goods returned|discount|commission|A|A freight note shows transport cost.
+1989|A wholesaler who holds goods in bulk and sells in smaller quantities performs the function of|financing|risk bearing|breaking bulk|transporting|C|Holding bulk and selling smaller quantities is breaking bulk.
+1991|A retailer's function of providing information to producers is called|storage|financing|market research|risk bearing|C|Providing producer information is market research.
+1993|A multiple shop is a chain of shops|owned by different owners|owned by one firm selling similar goods|selling different goods|owned by government|B|A multiple shop is a chain under one firm.
+1995|A franchise is an arrangement where|a firm uses another firm's brand and system for a fee|goods are returned|goods are stored|a loan is given|A|That is a franchise.
+1997|Goods that are returned to the seller require the issue of|a receipt|an invoice|a credit note|a debit note|C|Returned goods require a credit note.
+1999|A cash register is used to|record sales and cash received|insure goods|advertise|store goods|A|A cash register records sales/cash.
+2001|Impulse buying is encouraged by|advertising at point of sale|credit control|storage|insurance|A|It encourages impulse buying.
+2003|A price tag shows|the cost of goods to the seller|the selling price of goods|the discount|the tax|B|A price tag shows selling price.
+2005|A quotation normally states|quantity, price and terms|only price|only quantity|only the seller's name|A|A quotation states these.
+2007|An order form is sent by|the seller|the buyer|the bank|the insurer|B|An order form is sent by the buyer.
+2009|An inquiry is sent by the buyer to|request information about price and terms|demand payment|return goods|insure goods|A|An inquiry requests information.
+2011|A pro forma invoice is not|a demand for payment|used for import licence|a quotation|informative|A|A pro-forma invoice is not a demand for payment.
+2013|A consular invoice is endorsed by|the seller's bank|the consulate of the importing country|the transport company|the insurance firm|B|A consular invoice is endorsed there.
+2015|A delivery order authorises|release of goods to the buyer|payment of money|insurance of goods|return of goods|A|A delivery order authorises release.
+2017|A statement of account is sent|regularly to show the state of an account|only once|by the buyer|by the bank|A|A statement of account does this.
+2019|The main function of advertising in retailing is to|store goods|inform and persuade customers|transport goods|insure goods|B|Retail advertising informs/persuades.
+2021|Cost plus pricing adds a mark-up to|the selling price|total cost|the discount|the commission|B|Cost-plus pricing adds markup to total cost.
+2023|Loss leader pricing involves selling a product|at a high price|below cost to attract customers|at cost plus profit|at premium|B|That is loss-leader pricing.
+2024|Price discrimination means charging|the same price to all|different prices to different buyers for the same product|no price|a fixed price|B|That is price discrimination.
+1990|A market survey is conducted to|collect information on consumer needs|sell goods|store goods|advertise|A|A market survey collects such information.
+1992|A market is defined as|a place only|any arrangement where buyers and sellers meet|only a shop|only a building|B|That is a market.
+1994|Hire purchase differs from credit sale because|ownership passes only after final payment|ownership passes immediately|no interest is charged|goods are not delivered|A|That distinguishes hire purchase.
+1996|A trade fair is organised to|advertise and sell products|increase tax|hoard goods|reduce production|A|Trade fairs do this.
+1998|Sales promotion includes|advertising only|personal selling|free samples and discounts|insurance|C|These are sales promotion.
+2000|A dealer who buys in bulk and sells to retailers is a|consumer|wholesaler|producer|agent|B|A bulk buyer selling to retailers is a wholesaler.
+2002|A stock turnover rate measures|the speed at which stock is sold|the quantity of stock|the cost of stock|the profit|A|That is stock turnover.
+2004|Goods bought for resale are called|fixed assets|stock-in-trade|liabilities|capital|B|Goods bought for resale are stock-in-trade.
+1986|FOB means|free on board|freight on board|full order bill|free on buying|A|FOB means free on board.
+1988|Under CIF, the seller bears the cost of|goods, insurance and freight|goods only|freight only|insurance only|A|CIF includes these.
+1990|EXW means the goods are made available at|the buyer's premises|the port|the seller's premises|the ship|C|EXW means ex-works/seller's premises.
+1992|Under FOB, risk passes to the buyer when goods|reach the ship|reach the buyer|are paid for|are insured|A|Under FOB, risk passes when goods reach the ship.
+1994|Freight is the charge for|insuring goods|transporting goods|storing goods|producing goods|B|Freight is transport charge.
+1996|A shipping company's document of title to goods is the|manifest|bill of lading|invoice|consular invoice|B|It is a document of title to goods.
+1998|A bill of lading marked "clean" means goods were|damaged|received in good condition|short-shipped|insured|B|A clean bill of lading says goods were in good condition.
+2000|A bill of exchange endorsed to another person by the payee is|discounting|acceptance|dishonour|negotiation by endorsement|D|Endorsing a bill transfers it.
+2002|Acceptance of a bill of exchange is done by|the drawer|the drawee|the payee|the endorser|B|The drawee accepts a bill.
+2004|A letter of credit is issued by|the exporter's bank|the importer's bank|the shipping company|the insurer|B|A letter of credit is issued by the importer's bank.
+2006|A letter of credit protects|the insurer only|the shipper only|both exporter and importer|the government|C|A letter of credit protects both.
+2008|The rate at which a country's exports exchange for its imports is the|exchange rate|balance of trade|terms of trade|tariff|C|It is export/import exchange rate.
+2010|Import substitution means|banning imports|encouraging exports|producing locally what was formerly imported|taxing exports|C|That is import substitution.
+2012|Export subsidy is given to|raise export prices|encourage exports|discourage production|reduce export volume|B|Export subsidy encourages exports.
+2014|A customs officer checks goods at|the port of entry|the factory|the market|the bank|A|Customs officers check goods at entry ports.
+2016|A bonded warehouse is under the control of|customs|the trader|the bank|the insurer|A|A bonded warehouse is under customs control.
+2018|The main export of Nigeria is|cocoa|crude oil|palm oil|groundnut|B|Nigeria's main export is crude oil.
+2020|A country has favourable balance of payments when|receipts exceed payments|payments exceed receipts|trade equals|no trade|A|That is a favourable balance of payments.
+2022|A non-tariff barrier to trade is|customs duty|import quota|excise duty|sales tax|B|A quota is a non-tariff barrier.
+2024|Bilateral trade agreement involves|two countries|three countries|one country|all countries|A|Bilateral trade involves two countries.
+1995|Multilateral trade agreements involve|two countries|many countries|one country|none|B|Multilateral trade involves many countries.
+1997|The World Bank gives long-term loans mainly for|consumption|infrastructure and development|military|travel|B|The World Bank gives long-term development loans.
+1999|UNCTAD is concerned with|trade and development|insurance|banking|transport|A|UNCTAD deals with trade and development.
+2001|The ILO deals with|labour standards|trade|money|health|A|The ILO deals with labour standards.
+2003|ECOWAS headquarters is in|Lagos|Abuja|Lome|Accra|B|ECOWAS headquarters is in Abuja.
+1988|The memorandum of association contains all except|name clause|objects clause|capital clause|internal rules|D|Internal rules are in the articles, not memorandum.
+1990|The articles of association regulate|relations with outsiders|internal management|tax|insurance|B|Articles regulate internal management.
+1992|A statutory declaration is required for|winding up|incorporation|paying tax|issuing invoices|B|A statutory declaration is required for incorporation.
+1994|The Companies and Allied Matters Act was enacted in|1968|1976|1980|1990|D|CAMA was enacted in 1990.
+1996|A private limited company's name ends with|Plc|Ltd|Co|Inc|B|A private limited company ends with Ltd.
+1998|A public limited company's name ends with|Ltd|Plc|Co|Ent|B|A public limited company ends with Plc.
+2000|A company must hold its first annual general meeting within|18 months of incorporation|5 years|10 years|1 month|A|First AGM must be within 18 months.
+2002|A quorum is the|minimum number needed for a valid meeting|maximum number|chairperson|secretary|A|That is a quorum.
+2004|A proxy is a person who|attends and votes on behalf of a member|audits accounts|pays dividends|sells shares|A|That is a proxy.
+2006|Winding up of a company means|expansion|closure and liquidation|formation|merger|B|Winding up means closure/liquidation.
+2008|A receiver is appointed when a company is|expanding|in financial difficulty|profitable|incorporated|B|A receiver is appointed then.
+2010|An auditor's main duty is to|manage the company|check the accounts and report to shareholders|sell shares|pay dividends|B|That is the auditor's duty.
+2012|The company secretary is responsible for|production|keeping records and statutory documents|sales|insurance|B|That is the secretary's role.
+2014|A joint stock company is owned by|government|shareholders|one person|partners|B|A joint stock company is owned by shareholders.
+2016|In a limited partnership, a limited partner|manages the firm|has unlimited liability|has liability limited to his capital|takes no part in profits|C|A limited partner's liability is limited.
+2018|A sleeping partner is one who|contributes capital but does not manage|manages actively|lends money|audits accounts|A|That is a sleeping partner.
+2020|A nominal partner|contributes capital|lends his name without capital|manages the firm|is a creditor|B|That is a nominal partner.
+2021|A cooperative society's surplus is shared as|dividends|interest|patronage refund|commission|C|Cooperative surplus is shared as patronage refund.
+2022|A consumer cooperative buys goods|to sell to members at fair prices|for export|to hoard|for government|A|A consumer cooperative does this.
+2023|A marketing cooperative helps members|sell their produce|buy insurance|obtain loans|manufacture goods|A|A marketing cooperative helps members sell produce.
+2024|A public corporation is owned by|individuals|government|shareholders|partners|B|A public corporation is government-owned.
+1989|The Nigerian National Petroleum Company is an example of|partnership|cooperative|public corporation|sole trade|C|NNPC is a public corporation.
+1991|A company is said to have perpetual succession because|shareholders change but the company continues|it lasts one year|it ends with shareholders|it is a partnership|A|That is perpetual succession.
+1993|A promoter is a person who|takes the preliminary steps to form a company|audits accounts|sells shares|pays dividends|A|That is a promoter.
+1995|A holding company controls a subsidiary by|owning majority shares|lending money|employing staff|insuring goods|A|A holding company controls via majority shares.
+1990|Henri Fayol identified the functions of management as|buying and selling|planning, organising, commanding, coordinating, controlling|producing and storing|insuring and banking|B|Fayol's functions.
+1992|The principle of division of work in management means|sharing profits|specialisation of tasks|employing many workers|delegating authority|B|Division of work means specialisation.
+1994|Authority in management is the right to|give orders and expect compliance|earn profit|own capital|insure goods|A|That is authority.
+1996|Responsibility in management means|duty to carry out assigned tasks|right to command|sharing profit|buying goods|A|That is responsibility.
+1998|A democratic leadership style is one in which|the leader consults subordinates|the leader takes all decisions|no one decides|decisions are left to chance|A|That is democratic leadership.
+2000|An autocratic leader|consults subordinates|takes decisions alone|delegates authority|avoids decisions|B|That is autocratic leadership.
+2002|A laissez-faire leader|controls strictly|gives subordinates freedom to decide|decides alone|consults outsiders|B|That is laissez-faire.
+2004|A flat organisational structure has|many levels|few levels of authority|no levels|one level|B|A flat structure has few levels.
+2006|A tall organisational structure has|many levels of authority|few levels|no hierarchy|one manager|A|A tall structure has many levels.
+2008|A line organisation is based on|direct authority from top to bottom|committees|staff advisers|shared authority|A|That is line organisation.
+2010|A line and staff organisation combines|direct authority with specialist advice|only committees|only staff|only authority|A|That is line and staff.
+2012|A committee organisation makes decisions|by one person|collectively|by shareholders|by government|B|A committee decides collectively.
+2014|The process of comparing actual performance with standards is|planning|organising|staffing|controlling|D|Comparing performance with standards is controlling.
+2016|Recruitment is part of|planning|staffing|controlling|directing|B|Recruitment is part of staffing.
+2018|Induction is the process of|dismissing workers|introducing new employees to the organisation|paying wages|promoting staff|B|That is induction.
+2020|An organisation chart shows|the flow of authority and relationships|profit|tax|goods|A|An organisation chart shows this.
+2022|A supervisor is a|top-level manager|first-line manager|board member|shareholder|B|A supervisor is first-line management.
+2024|Management by objectives emphasises|setting goals jointly with subordinates|authority only|control only|profit only|A|MBO emphasises joint goal setting.
+1999|A job description states|duties and responsibilities of a post|salary|profit|tax|A|A job description states these.
+2001|A job specification states|the qualifications required for a post|duties only|salary|working hours|A|A job specification states these.
+1991|Market segmentation groups consumers by|geography, demography and behaviour|price only|product only|profit|A|These are segmentation bases.
+1993|A target market is|all consumers|the specific group a firm aims to serve|the government|the competitors|B|That is the target market.
+1995|Product positioning refers to|the place of production|creating a distinct image of a product in consumers' minds|pricing|advertising only|B|That is positioning.
+1997|A brand name is|the name used to identify a product|a price|a discount|an advert|A|That is a brand name.
+1999|A trade mark is|a slogan|a legally protected brand symbol|a price tag|a discount|B|That is a trademark.
+2001|Packaging serves the function of|protecting and promoting the product|pricing|advertising only|insuring|A|Packaging does both.
+2003|Labelling provides|product information|profit|tax|insurance|A|Labelling provides information.
+2005|A product mix is|the combination of products a firm offers|the price|the place|the promotion|A|That is product mix.
+2007|Penetration pricing sets a price|low to gain market share|high to skim profit|at cost|at premium|A|Penetration pricing is low.
+2009|Price skimming sets a|low price|high initial price|zero price|fixed price|B|Skimming sets a high initial price.
+2011|A distribution channel is|the route goods follow from producer to consumer|the price|the promotion|the product|A|That is a distribution channel.
+2013|A zero-level channel means|direct sale from producer to consumer|many intermediaries|no sale|government sale|A|That is zero-level channel.
+2015|Promotion mix includes all except|advertising|personal selling|sales promotion|warehousing|D|Warehousing is not in the promotion mix.
+2017|A marketing strategy is|a plan to achieve marketing objectives|a budget|a product|a price|A|That is a marketing strategy.
+2019|After-sales service is part of|product|price|place|promotion|A|After-sales service is part of the product.
+2021|Marketing research is the|systematic collection of marketing information|production of goods|storage of goods|payment of tax|A|That is marketing research.
+2022|A questionnaire is used in|marketing research|pricing|advertising|insurance|A|A questionnaire is used in research.
+2023|A focus group interview involves|a small group discussing a product|one person only|no discussion|government officials|A|That is a focus group.
+2024|Customer satisfaction is achieved when|product performance meets expectations|price is high|goods are stored|tax is paid|A|That gives customer satisfaction.
+2000|A market niche is|a small specialised segment|the whole market|government market|foreign market|A|That is a market niche.
+1992|A shipping company that carries goods for many owners is a|tramp|liner|charter|ferry|B|A liner carries goods for many owners on fixed routes.
+1994|A tramp ship is one that|has a fixed route and schedule|sails wherever cargo is available|carries only passengers|carries only mail|B|That is a tramp ship.
+1996|A chartered ship is one|hired for a specific voyage or period|owned by government|used for fishing|used for war|A|That is a chartered ship.
+1998|Containerisation is important because it|reduces handling costs and damage|increases handling costs|slows transport|increases damage|A|That is the benefit of containerisation.
+2000|A rail transport advantage is|door-to-door service|suitability for bulky goods over long distances|speed|flexibility|B|That is a rail advantage.
+2002|A disadvantage of air transport is|speed|high cost|safety|reliability|B|Air transport's disadvantage is high cost.
+2004|A telegram is used for|urgent written messages|storing goods|insuring goods|pricing|A|Telegram is for urgent written messages.
+2006|A telex machine transmits|goods|written messages over telephone lines|money|people|B|Telex transmits written messages.
+2008|Fax transmission sends|documents electronically|goods|money|people|A|Fax sends documents electronically.
+2010|A private warehouse is owned by|a firm for its own goods|the government|licensed operators|retailers only|A|A private warehouse is owned by a firm.
+2012|A bonded warehouse is used for|local goods|imported goods awaiting duty payment|perishable goods|machinery|B|That is a bonded warehouse.
+2014|A state warehouse is owned by|individuals|government|cooperative societies|companies|B|A state warehouse is government-owned.
+2016|A cold store preserves|perishable goods|textiles|machinery|building materials|A|Cold stores preserve perishables.
+2018|An advertising medium suitable for a local audience is|handbills and posters|television|national newspaper|radio|A|These suit a local audience.
+2020|A trade journal advertises to|the general public|a specialised trade audience|children|farmers only|B|Trade journals target a trade audience.
+2022|Cinema advertising is a form of|outdoor|personal selling|publicity|audiovisual advertising|D|Cinema advertising is audiovisual.
+2024|Direct mail advertising involves sending|letters or catalogues to potential customers|radio adverts|posters|television adverts|A|That is direct mail.
+1985|A catalogue shows|prices and details of goods for sale|goods returned|payment|insurance|A|A catalogue shows these.
+1987|A trade mark registration protects a|brand symbol|price|place|promotion|A|Trademark registration protects a brand symbol.
+1989|A showroom displays|goods for sale|insurance|payment|tax|A|A showroom displays goods for sale.
+1997|Cost-push inflation is caused by|rising production costs|rising demand|falling money supply|falling wages|A|Cost-push inflation comes from rising costs.
+2002|Demand-pull inflation occurs when|costs rise|demand exceeds supply|supply exceeds demand|prices fall|B|That causes demand-pull inflation.
+2009|Structural unemployment results from|changes in the structure of the economy|seasonal work|voluntary idleness|frictional movement|A|That causes structural unemployment.
+2018|A feasibility study determines|whether a business idea is viable|the tax rate|the insurance premium|the price of goods|A|A feasibility study tests viability.
+2024|A business plan is important because it|guides operations and attracts finance|pays tax|insures goods|stores goods|A|That is why a business plan is important.
+1985|A contract is|any agreement|an agreement enforceable by law|a promise|a written document|B|That is a contract.
+1987|The element of a valid contract meaning "something of value" is|offer|acceptance|consideration|capacity|C|Consideration is something of value.
+1989|Displaying goods in a shop window with a price is|an offer|acceptance|a contract|an invitation to treat|D|Displaying goods with a price is usually an invitation to treat.
+1991|A person lacking capacity to contract is|a company|a minor|a trader|an adult|B|A minor lacks capacity to contract.
+1993|A contract that a party may avoid is|void|valid|voidable|illegal|C|A voidable contract may be avoided.
+1995|A contract with no legal effect from the outset is|voidable|void|valid|executory|B|A void contract has no legal effect.
+1997|"Caveat venditor" means|let the seller beware|let the buyer beware|no one gives what he lacks|beyond the powers|A|Caveat venditor means seller beware.
+1999|An implied condition in a sale of goods is that goods are|cheap|fit for the purpose|imported|advertised|B|Goods must be fit for purpose.
+2001|An agent is a person who|owns the business|is a partner|acts on behalf of another|is a shareholder|C|That is an agent.
+2003|The person on whose behalf an agent acts is the|third party|principal|creditor|debtor|B|The person on whose behalf an agent acts is principal.
+2005|A remedy for breach of contract is|insurance|warehousing|advertising|damages|D|Damages are a remedy for breach of contract.
+2007|An agreement where ownership passes at a future date is|sale|hire purchase|barter|an agreement to sell|D|Ownership passes in future.
+2009|Under hire purchase, the hirer may return the goods and end the agreement under|a warranty|an indemnity|a termination clause|a guarantee|C|The hirer may return goods under it.
+2011|The Hire Purchase Act protects the|seller|hirer|bank|insurer|B|The Hire Purchase Act protects the hirer.
+2013|A person who buys in good faith unaware of a defect in the seller's title is|a bona fide purchaser|an agent|a debtor|a bailee|A|A good-faith purchaser without notice.
+2015|A partnership is dissolved by|admission of a partner|increase in profit|death of a partner|advertising|C|Death dissolves a partnership.
+2017|Which is NOT a type of partner?|Active partner|Sleeping partner|Nominal partner|Silent shareholder|D|It is not a type of partner.
+2019|Ultra vires acts are|within a company's powers|beyond its powers|profitable|legal|B|Ultra vires means beyond powers.
+2021|Lifting the corporate veil means|treating the company as separate|dissolving it|ignoring its separate personality|insuring it|C|That is lifting the corporate veil.
+2023|The doctrine of indoor management protects|directors|shareholders|creditors|outsiders dealing in good faith|D|Indoor management protects them.
+1986|An arbitration clause provides for settlement of disputes by|a third party|the court|the police|the bank|A|Arbitration settles disputes through a third party.
+1988|An employment contract states|profit|terms and conditions of work|tax|insurance|B|An employment contract states these.
+1990|A trade dispute is between|two companies|two consumers|employers and employees|banks and insurers|C|A trade dispute is between them.
+1992|The Weights and Measures Act protects consumers against|high price|advertising|credit|short weight|D|Weights and Measures protects against short weight.
+1994|Intellectual property includes all except|patents|trademarks|copyrights|land|D|Land is not intellectual property.
+1996|Passing off in business means|exporting goods|selling goods as those of another firm|importing goods|storing goods|B|That is passing off.
+1998|A trade secret is protected by|a patent|confidentiality agreements|copyright|a trademark|B|Trade secrets are protected by confidentiality.
+2000|Trademarks in Nigeria are registered by|SON|NAFDAC|SEC|the Trademarks Registry|D|Trademarks are registered there.
+2002|An offer lapses when|accepted|rejected|performed|written|B|An offer lapses when rejected.
+2004|Consideration must be|past|illegal|present or future|imaginary|C|Consideration must be present or future, not past.
+1988|A bank that accepts deposits and lends to customers is a|central bank|commercial bank|development bank|merchant bank|B|It accepts deposits and lends.
+1990|The CBN is banker to|individuals|cooperative societies|government|foreign firms|C|The CBN is banker to government.
+1992|Banks keep reserves with the CBN to|earn profit|meet clearing obligations and monetary control|pay tax|insure deposits|B|Reserves serve these purposes.
+1994|Currency is issued by|the CBN|commercial banks|SEC|NDIC|A|Currency is issued by the CBN.
+1996|A post-dated cheque is|dated in the past|dated in the future|not dated|crossed|B|That is a post-dated cheque.
+1998|A cheque payable to bearer is|crossed|stale|open|returned|C|A bearer cheque is open.
+2000|A bank statement is usually sent|daily|weekly|yearly|monthly|D|Bank statements are usually monthly.
+2002|Bank charges are|interest paid on deposits|fees charged for services rendered|dividends|taxes|B|Bank charges are service fees.
+2004|Domiciliary accounts are operated in|naira|foreign currency|coins|shares|B|Domiciliary accounts are in foreign currency.
+2006|BVN stands for|Bank Voucher Number|Basic Value Number|Bank Verification Number|Bank Value Note|C|BVN stands for that.
+2008|Mobile money transfer is an example of|warehousing|insurance|advertising|e-banking|D|Mobile money is e-banking.
+2010|POS stands for|Point of Sale|Post of Sale|Payment of Sale|Point of Service|A|POS stands for Point of Sale.
+2012|A cheque that cannot be cashed over the counter is|open|crossed|endorsed|post-dated|B|A crossed cheque cannot be cashed at the counter.
+2014|The drawer of a bill of exchange is the|debtor|bank|creditor|payee|C|The drawer of a bill of exchange is the creditor.
+2016|A person who signs a cheque to transfer it is an|drawer|drawee|payee|endorser|D|A person signing a cheque to transfer it is endorser.
+2018|Treasury bills are issued by|government|commercial banks|companies|individuals|A|Treasury bills are issued by government.
+2020|A discount house deals in|long-term loans|short-term securities|insurance|goods|B|A discount house deals in short-term securities.
+2022|A stock exchange provides a market where|goods are sold|shares can be bought and sold|currency is printed|insurance is sold|B|A stock exchange provides that market.
+2024|The primary market deals in|existing shares|bonds only|goods|new issues of shares|D|The primary market deals in new issues.
+1987|The secondary market deals in|new shares|existing shares|goods|money|B|The secondary market deals in existing shares.
+1989|An issuing house is concerned with|insuring goods|lending|selling new shares to the public|warehousing|C|An issuing house does this.
+1991|A unit trust is a|cooperative|commercial bank|public corporation|pooled investment fund|D|A unit trust is a pooled fund.
+1993|The Nigerian Exchange is regulated by|SEC|CBN|NDIC|NAFDAC|A|The Nigerian Exchange is regulated by SEC.
+1995|NDIC insures|unlimited deposits|deposits up to a fixed amount|no deposits|only company deposits|B|NDIC insures deposits up to a limit.
+1997|The bank rate is the rate at which|banks lend to customers|customers save|the CBN lends to banks|forex is sold|C|That is the bank rate.
+1999|A balanced budget occurs when|revenue exceeds expenditure|expenditure exceeds revenue|revenue equals expenditure|there is no revenue|C|That is a balanced budget.
+2001|A sinking fund is used to|repay debt|pay salaries|insure goods|advertise|A|A sinking fund is for debt repayment.
+2003|Recurrent expenditure is spending on|capital projects|day-to-day running of government|machinery|buildings|B|That is recurrent expenditure.
+2005|Capital expenditure is spending on|salaries|stationery|durable assets|fuel|C|Capital expenditure is on durable assets.
+2007|Ways and means advances are made by the CBN to|commercial banks|individuals|companies|the federal government|D|Ways and means advances go to federal government.
+1988|AfCFTA aims to|create a single African market|increase tariffs|ban trade|issue currency|A|AfCFTA aims at a single African market.
+1990|The AU is headquartered in|Abuja|Addis Ababa|Accra|Cairo|B|The AU is headquartered in Addis Ababa.
+1992|The ECOWAS protocol on free movement allows citizens to|travel without visas within member states|settle anywhere without documents|avoid all taxes|trade only in Nigeria|A|ECOWAS free movement allows this.
+1994|A common external tariff is imposed by a|free trade area|single firm|household|customs union|D|A common external tariff is imposed by a customs union.
+1996|A free trade area removes|internal tariffs|all tariffs|no tariffs|external tariffs|A|A free trade area removes internal tariffs.
+1998|The main objective of a trade bloc is to|restrict trade|promote trade among members|increase tariffs|ban imports|B|That is the aim of a trade bloc.
+2000|A common market allows free movement of|goods only|capital only|goods, services, capital and labour|goods and services only|C|A common market allows free movement of these.
+2002|Counter trade involves|cash sales|insurance|advertising|exchanging goods for goods|D|That is counter trade.
+2004|A switch trade is a form of|counter trade|retail trade|home trade|barter|A|Switch trade is a form of counter trade.
+2006|The IMF gives short-term loans to correct|insurance|balance of payments problems|advertising|storage|B|The IMF gives short-term loans for BOP problems.
+2008|The World Bank was established in|1950|1960|1944|1970|C|The World Bank was established in 1944.
+2010|The IFC is the private sector arm of|the IMF|the WTO|OPEC|the World Bank Group|D|IFC is the private-sector arm of the World Bank Group.
+2012|The WTO is headquartered in|Geneva|New York|Paris|London|A|WTO is headquartered in Geneva.
+2014|The Nigerian Investment Promotion Commission is responsible for|encouraging investment|collecting tax|insuring goods|banking|A|NIPC promotes investment.
+2016|NEXIM Bank finances|imports|insurance|exports|retail|C|NEXIM Bank finances exports.
+2018|The Bank of Industry provides|consumer loans|insurance|advertising|industrial loans|D|Bank of Industry provides industrial loans.
+2020|A bonded factory processes|imported goods before duty is paid|goods already sold|bank documents|insurance policies|A|A bonded factory processes these.
+2022|A free port allows|higher tariffs|duty-free importation|a ban on trade|only exports|B|A free port allows duty-free imports.
+2024|An export processing zone aims to|increase tariffs|reduce trade|promote manufacturing for export|insure goods|C|EPZs promote export manufacturing.
+1986|A trade embargo is imposed to|encourage trade|restrict trade with a country|reduce prices|increase imports|B|An embargo restricts trade.
+1988|Anti-dumping duties are imposed to|discourage dumping|encourage dumping|raise revenue only|reduce imports|A|Anti-dumping duties discourage dumping.
+1990|The certificate of insurance in foreign trade is issued by|the exporter|the shipping company|the insurer|the bank|C|A certificate of insurance is issued by the insurer.
+1992|A foreign exchange market deals in|goods|services|currencies|insurance|C|The forex market deals in currencies.
+1994|An import licence is required to|encourage imports|insure goods|advertise|control imports|D|Import licences control imports.
+1996|A shipping manifest lists|the ship's cargo|prices|discounts|insurance|A|A manifest lists cargo.
+1987|NHIS is concerned with|motor insurance|health insurance|marine insurance|fire insurance|B|NHIS is health insurance.
+1989|A pension is paid to|students|traders|retired workers|tourists|C|Pension is paid to retired workers.
+1991|The Pension Reform Act established a|cooperative|commercial bank|public corporation|contributory pension scheme|D|The Pension Reform Act established it.
+1993|Aviation insurance covers|aircraft and liability to passengers|ships|goods|houses|A|Aviation insurance covers these.
+1995|Personal accident insurance covers|fire|injury to the insured|theft of goods|marine losses|B|Personal accident covers injury.
+1997|Third-party insurance is compulsory for|ships|goods|motor vehicles|houses|C|Third-party insurance is compulsory for motor vehicles.
+1999|Comprehensive motor insurance covers|only third party|fire only|theft only|own damage and third party|D|Comprehensive motor insurance covers both.
+2001|Contribution in insurance applies when|one insurer covers the whole loss|two or more insurers cover the same risk|no insurer is involved|the insured is uninsured|B|That is contribution.
+2003|Insurable interest must exist|never|at the time of loss|only at proposal|only after a claim|B|Insurable interest must exist at loss.
+2005|Non-disclosure of a material fact may lead to|higher premium|a valid claim|avoidance of the contract by the insurer|automatic renewal|C|Non-disclosure can lead to avoidance.
+2007|A warranty in insurance is a|guarantee by the insurer|discount|commission|promise by the insured|D|A warranty is the insured's promise.
+2009|The premium depends on|the risk involved|the insured's age only|the insurer's profit|the government|A|Premium depends on risk.
+2011|A proposal form is completed by|the insurer|the applicant for insurance|the broker|the government|B|The proposal form is completed by the applicant.
+2013|An endowment policy matures|only on death|never|at a fixed date or on death|after one year|C|An endowment matures then.
+2015|A whole life policy pays|on a fixed date|after one year|never|on the death of the assured|D|Whole life pays on death.
+2017|Insurers invest premiums in|securities and property|only cash|only gold|only land|A|Insurers invest premiums in these.
+2019|The insurance market is regulated by|CBN|NAICOM|SEC|NDIC|B|Insurance is regulated by NAICOM.
+2021|The principle of indemnity does not apply to|fire insurance|marine insurance|life assurance|motor insurance|C|Indemnity does not apply to life assurance.
+2023|A reversionary bonus is associated with|fire insurance|marine insurance|motor insurance|life assurance|D|Reversionary bonus is associated with life assurance.
+1986|The insurer's liability under a policy is limited to|the sum insured|double the premium|the insured's income|no limit|A|Insurer liability is limited to the sum insured.
+1988|Public liability insurance covers|own property|injury to third parties|employees only|goods in transit|B|Public liability covers third-party injury.
+1990|Employer's liability insurance covers|injury to customers|fire|injury to employees|theft|C|Employer's liability covers employee injury.
+1992|Goods in transit insurance covers|goods in store|machinery|buildings|goods being transported|D|Goods-in-transit insurance covers transported goods.
+1994|A claim is settled based on|the terms of the policy|the insured's wish|the insurer's profit|government order|A|Claims are settled according to policy terms.
+1996|The average clause in insurance applies when the insured is|fully insured|under-insured|uninsured|over-insured|B|The average clause applies when under-insured.
+1988|SON stands for|State Organisation of Nigeria|Standards Office of Nigeria|Standards Organisation of Nigeria|State Office of Nigeria|C|SON stands for that.
+1990|A consumer complaining about a defective product should first approach|the police|the seller|the court|the bank|B|A consumer should first approach the seller.
+1992|Adulterated goods are those that|are pure|are expensive|have been contaminated or diluted|are imported|C|That is adulteration.
+1994|A consumer has the right to|free goods|safe products|tax refunds|free insurance|B|Consumers have a right to safe products.
+1996|False advertising is|informing consumers|ethical|misleading consumers|legal|C|False advertising is misleading.
+1998|A product recall occurs when goods are|new|cheap|exported|defective|D|A product recall is for defective goods.
+2000|A consumer who buys goods by description relies on|the seller's description|the price|the brand|the advert|A|Buying by description relies on it.
+2002|The Consumer Protection Council was established in|1999|1992|2005|2010|B|The Consumer Protection Council was established in 1992.
+2004|A warranty on goods is|a loan|a tax|a guarantee by the seller|a discount|C|A warranty is a seller's guarantee.
+2006|A guarantee is a promise to|increase price|reduce quality|hoard goods|repair or replace|D|A guarantee promises repair/replacement.
+2008|Consumer sovereignty means|consumers determine what is produced|producers decide|government decides|no one decides|A|That is consumer sovereignty.
+2010|Brand loyalty is|a brand name|repeated purchase of a brand|a brand mark|a trademark|B|That is brand loyalty.
+2012|A product line is|a price|a place|a group of related products|a promotion|C|That is a product line.
+2014|A product portfolio is|one product|a price|a promotion|all products of a firm|D|That is a product portfolio.
+2016|A product's unique selling point is|a feature that distinguishes it from competitors|its price|its place|its promotion|A|That is the USP.
+2018|Odd pricing sets prices|above a round figure|just below a round figure|at a round figure|at zero|B|That is odd pricing.
+2020|Psychological pricing appeals to|tax|insurance|customer perception|transport|C|Psychological pricing appeals to perception.
+2022|Charging different prices for the same product at different times is|cost-plus pricing|skimming|penetration|peak-load pricing|D|Different prices at different times is peak-load pricing.
+2024|Sales forecasting estimates|future sales|past sales|profits|costs|A|Sales forecasting estimates future sales.
+1987|A salesperson's duty includes|auditing|demonstrating products|insuring|banking|B|A salesperson demonstrates products.
+1989|A trade exhibition is organised to|collect tax|insure goods|display products|bank|C|Trade exhibitions display products.
+1991|Public relations aims to|sell directly|store goods|transport goods|build goodwill|D|Public relations builds goodwill.
+1993|Sponsorship is a form of|promotion|pricing|distribution|production|A|Sponsorship is a promotional tool.
+1995|Word-of-mouth advertising is|a paid advert|informal recommendation|a poster|a radio slot|B|Word-of-mouth is informal recommendation.
+1997|A brand ambassador is|a product|a price|a person promoting a brand|an advert|C|That is a brand ambassador.
+1999|A market leader is the firm with|a new product|a small share|government backing|the largest market share|D|A market leader has the largest share.
+2001|Market share is a firm's sales as a percentage of|total market sales|profit|cost|tax|A|Market share is sales as a percentage of total market sales.
+2003|Competitor analysis studies|customers|rival firms|suppliers|employees|B|Competitor analysis studies rivals.
+2005|SWOT analysis examines|sales, wages, output, taxes|price, place, product, promotion|strengths, weaknesses, opportunities, threats|planning, organising, staffing, controlling|C|That is SWOT.
+2007|PEST analysis examines|price, export, sales, tax|product, equity, stock, trade|planning, economy, sales, tax|political, economic, social, technological factors|D|That is PEST.
+1989|A sole trader's main source of capital is|personal savings|shares|debentures|the stock exchange|A|A sole trader's main capital source is personal savings.
+1991|A business name must be registered with the|SON|Corporate Affairs Commission|SEC|bank|B|Business names are registered with CAC.
+1993|In the absence of a partnership deed, profits are shared|unequally|by capital only|equally|by age|C|Without a deed, profits are shared equally.
+1995|A company has perpetual succession because it|has one owner|has no capital|has no employees|can sue and be sued and continues despite changes in membership|D|That is perpetual succession.
+1997|Shareholders' liability is limited to|the amount unpaid on their shares|their personal property|the company's debts|nothing|A|Shareholders' liability is limited to that.
+1999|Debenture holders are|owners|creditors|employees|directors|B|Debenture holders are creditors.
+2001|Debenture holders receive|dividends|nothing|fixed interest|bonuses|C|Debenture holders receive fixed interest.
+2003|The annual general meeting is held to|employ staff|buy goods|pay taxes|present accounts to shareholders|D|The AGM does this.
+2005|The first step in forming a company is|promotion|liquidation|audit|insurance|A|Promotion is the first step in company formation.
+2007|A certificate of incorporation is issued by|the bank|CAC|SON|SEC|B|The certificate of incorporation is issued by CAC.
+2009|A prospectus invites the public to|insure goods|pay taxes|buy shares|advertise|C|A prospectus invites the public to buy shares.
+2011|A statutory meeting is held by|partnerships|sole traders|cooperatives|public companies|D|Statutory meetings are held by public companies.
+2013|A special resolution requires|75% majority|50% majority|25% majority|no majority|A|A special resolution requires 75%.
+2015|An ordinary resolution requires|75% majority|a simple majority|25% majority|unanimity|B|An ordinary resolution requires simple majority.
+2017|A public corporation is managed by|a board appointed by government|shareholders|partners|members|A|Public corporations are managed by such a board.
+2019|The main advantage of privatisation is|higher taxes|reduced competition|government control|increased efficiency|D|The main advantage of privatisation is efficiency.
+2021|Nationalisation means|selling to private owners|government takeover of private enterprises|commercialisation|deregulation|B|That is nationalisation.
+2023|Deregulation means|increasing government control|nationalisation|removing government controls|privatisation|C|That is deregulation.
+1988|A cooperative society is registered under the|Companies Act|Insurance Act|Partnership Act|Cooperative Societies Act|D|Cooperatives are registered under it.
+1990|A credit and thrift cooperative encourages|savings among members|production|export|insurance|A|Credit and thrift cooperatives encourage savings.
+1992|A consumer cooperative buys goods|for export|to sell to members at fair prices|to hoard|for government|B|A consumer cooperative does this.
+1994|A marketing cooperative helps members|buy insurance|obtain loans|sell their produce|manufacture goods|C|A marketing cooperative helps members sell produce.
+1996|A producer cooperative is formed by|consumers|retailers|insurers|producers of similar goods|D|A producer cooperative is formed by them.
+1998|A multinational company is one that|operates in several countries|operates in one country|is owned by government|is a partnership|A|That is a multinational company.
+2000|Shares of a private limited company are|freely traded on the stock exchange|not offered to the general public|sold to government only|given free|B|Private company shares are not public.
+2002|A merger is|the sale of a company|liquidation|the combination of two or more companies|incorporation|C|That is a merger.
+2004|An acquisition is|forming a company|dissolving a company|insuring a company|taking over another company|D|That is an acquisition.
+2006|A conglomerate is|a group of companies in different industries|one company|a partnership|a cooperative|A|That is a conglomerate.
+2008|A cartel is|a cooperative|an association of firms fixing prices|a public corporation|a partnership|B|That is a cartel.
+2010|A chamber of commerce is an association of|workers|consumers|business people in a locality|bankers only|C|A chamber of commerce is their association.
+1991|Filing is the process of|destroying documents|selling documents|arranging documents for easy retrieval|advertising|C|That is filing.
+1993|An alphabetical filing system arranges documents by|date|number|subject|name|D|Alphabetical filing arranges by name.
+1995|A chronological filing system arranges documents by|date|name|number|subject|A|Chronological filing arranges by date.
+1997|A memorandum is used for|external advertising|internal communication|payment|insurance|B|A memorandum is internal.
+1999|A circular letter is sent to|one person|the bank|many people with the same message|the government|C|A circular goes to many people.
+2001|A report is|a price list|a receipt|an invoice|a formal account of an event or investigation|D|That is a report.
+2003|An agenda is|a list of items for a meeting|minutes|a report|a memo|A|That is an agenda.
+2005|Minutes are|an agenda|a record of proceedings at a meeting|a report|a memo|B|That is minutes.
+2007|A photocopier is used for|filing|computing|reproducing documents|communicating|C|A photocopier reproduces documents.
+2009|A franking machine is used to|type letters|file documents|photocopy|stamp postage on mail|D|A franking machine stamps postage.
+2011|The mail room handles|incoming and outgoing mail|accounts|insurance|advertising|A|The mail room handles both.
+2013|A filing cabinet is used for|typing|storing documents|photocopying|computing|B|A filing cabinet stores documents.
+2015|A computer is used in the office for|filing only|typing only|word processing and data storage|postage only|C|A computer does these.
+2017|A receptionist's duty is to|audit accounts|file documents|insure goods|receive visitors and direct them|D|That is the receptionist's duty.
+2019|A business letter should be|clear, concise and courteous|long and vague|rude|informal|A|A business letter should be so.
+2021|E-mail is a form of|transport|electronic communication|insurance|banking|B|E-mail is electronic communication.
+2023|A notice board is used to|store documents|compute|display information|photocopy|C|A notice board displays information.
+1987|Which of these is an aid to trade?|Manufacturing|Farming|Mining|Warehousing|D|Warehousing is an aid to trade.
+1989|Foreign trade is trade between|two regions in one country|a country and another country|a wholesaler and a retailer|a producer and a consumer|B|Foreign trade is between countries.
+1991|A wholesaler performs the function of|selling in small quantities to consumers|producing goods|buying in bulk and selling in smaller quantities|insuring goods|C|That is a wholesaler's function.
+1993|Visible trade involves|goods|services|insurance|banking|A|Visible trade involves goods.
+1995|An embargo differs from a quota because an embargo|limits quantity|imposes a tax|subsidises exports|bans trade completely|D|An embargo bans trade completely.
+1997|A charter party is an agreement between|the shipowner and the charterer|buyer and seller|insurer and insured|bank and customer|A|A charter party is between them.
+1999|Money overcomes the problem of|double coincidence of wants|inflation|taxation|insurance|A|Money overcomes that barter problem.
+2001|The primary motive of a business is|charity|employment|profit|taxation|C|The primary motive of business is profit.
+2003|A business risk is|a guaranteed profit|a loss|an insurance|the possibility of loss|D|Business risk is the possibility of loss.
+2005|Speculative risk involves|the chance of gain or loss|only loss|only gain|no risk|A|Speculative risk involves both.
+2007|Working capital is used for|buying fixed assets|day-to-day operations|long-term investment|paying dividends only|B|Working capital is for daily operations.
+2009|Innovation means|introducing new ideas, products or methods|copying products|hoarding goods|reducing quality|A|That is innovation.
+2024|Globalisation means|isolation of economies|reduction of trade|banning imports|increased interconnection of world economies|D|That is globalisation.
+`;
+
+(function(){
+  "use strict";
+  const LETTERS = ["A","B","C","D"];
+  const ALL = RAW.trim().split("\n").filter(l => l.trim().length).map(line => {
+    const p = line.split("|");
+    return { y:p[0].trim(), q:p[1].trim(), o:[p[2].trim(),p[3].trim(),p[4].trim(),p[5].trim()], a:LETTERS.indexOf(p[6].trim()), e:p[7].trim() };
+  });
+  const SET_COUNT = 10;
+  const PER_SET = Math.ceil(ALL.length / SET_COUNT);
+  const SETS = [];
+  for (let i=0;i<SET_COUNT;i++) SETS.push(ALL.slice(i*PER_SET,(i+1)*PER_SET));
+  const $ = id => document.getElementById(id);
+  function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+  const STORE_KEY = "jamb_commerce_progress_v1";
+  function loadProgress(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||{}}catch(e){return{}}}
+  function saveProgress(o){try{localStorage.setItem(STORE_KEY,JSON.stringify(o))}catch(e){}}
+  let progress = loadProgress();
+  const state = { setIndex:null, order:[], idx:0, answers:{}, shuffled:{}, finished:false };
+
+  function renderHome(){
+    $("home").classList.remove("hidden");
+    $("quiz").classList.add("hidden");
+    $("result").classList.add("hidden");
+    const grid = $("setGrid"); grid.innerHTML = "";
+    SETS.forEach((set,i)=>{
+      const best = progress[i]||0;
+      const card = document.createElement("button");
+      card.className = "set-card";
+      card.innerHTML = `<div class="num">SET ${i+1}</div><div class="lbl">Questions ${i*PER_SET+1} – ${Math.min((i+1)*PER_SET,ALL.length)}</div><div class="lbl" style="color:var(--gold);font-weight:700;margin-top:6px">${best?"Best: "+best+"%":"Not attempted"}</div><div class="prog"><i style="width:${best}%"></i></div>`;
+      card.addEventListener("click",()=>startSet(i));
+      grid.appendChild(card);
+    });
+    $("totalInfo").textContent = ALL.length+" Questions";
+  }
+  function startSet(i){
+    state.setIndex=i;
+    state.order=shuffle([...Array(SETS[i].length).keys()]);
+    state.idx=0; state.answers={}; state.shuffled={}; state.finished=false;
+    $("home").classList.add("hidden"); $("result").classList.add("hidden"); $("quiz").classList.remove("hidden");
+    $("setLabel").textContent = "Set "+(i+1);
+    renderQuestion(); window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function currentQuestion(){
+    const realIndex = state.order[state.idx];
+    const q = SETS[state.setIndex][realIndex];
+    if (!state.shuffled[realIndex]){
+      const correctText = q.o[q.a];
+      const opts = shuffle(q.o);
+      state.shuffled[realIndex] = { opts, correctPos: opts.indexOf(correctText) };
+    }
+    return { q, realIndex, sh: state.shuffled[realIndex] };
+  }
+  function renderQuestion(){
+    const { q, realIndex, sh } = currentQuestion();
+    $("yearBadge").textContent = "JAMB "+q.y;
+    $("qCounter").textContent = "Q "+(state.idx+1)+" / "+state.order.length;
+    $("qText").textContent = q.q;
+    $("progressFill").style.width = (state.idx/state.order.length)*100+"%";
+    let score=0; Object.values(state.answers).forEach(a=>{if(a.chosen===a.correct)score++});
+    $("liveScore").textContent = "Score: "+score;
+    const box = $("opts"); box.innerHTML = "";
+    const answered = state.answers[realIndex];
+    const correctPos = sh.correctPos;
+    sh.opts.forEach((text,pos)=>{
+      const btn = document.createElement("button");
+      btn.className = "opt";
+      btn.innerHTML = `<span class="key">${LETTERS[pos]}</span><span>${text}</span>`;
+      if (answered){
+        btn.classList.add("locked");
+        if (pos===correctPos) btn.classList.add("correct");
+        else if (pos===answered.chosen) btn.classList.add("wrong");
+        else btn.classList.add("dim");
+      } else {
+        btn.addEventListener("click",()=>choose(pos,correctPos,realIndex));
+      }
+      box.appendChild(btn);
+    });
+    const exBox = $("explainBox"); exBox.innerHTML = "";
+    if (answered) exBox.innerHTML = buildExplanation(answered,correctPos,q,sh);
+    $("prevBtn").disabled = state.idx===0;
+    const isLast = state.idx===state.order.length-1;
+    $("nextBtn").textContent = isLast ? "Finish Set ✓" : "Next →";
+  }
+  function buildExplanation(answered,correctPos,q,sh){
+    const isCorrect = answered.chosen===correctPos;
+    const correctLetter = LETTERS[correctPos];
+    const chosenLetter = LETTERS[answered.chosen];
+    const correctText = sh.opts[correctPos];
+    const verdict = isCorrect ? `<div class="head">✅ Correct!</div>` : `<div class="head">❌ Not quite — you chose ${chosenLetter}</div>`;
+    return `<div class="explain ${isCorrect?"ok":"no"}">${verdict}<div class="ansline">Answer: ${correctLetter}. ${correctText}</div><div class="body">${q.e}</div></div>`;
+  }
+  function choose(pos,correctPos,realIndex){
+    state.answers[realIndex] = { chosen:pos, correct:correctPos };
+    renderQuestion();
+  }
+  $("nextBtn").addEventListener("click",()=>{
+    if (state.idx<state.order.length-1){ state.idx++; renderQuestion(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else finishSet();
+  });
+  $("prevBtn").addEventListener("click",()=>{
+    if (state.idx>0){ state.idx--; renderQuestion(); window.scrollTo({top:0,behavior:"smooth"}); }
+  });
+  $("backBtn").addEventListener("click",()=>{
+    if (confirm("Leave this set? Your answers for this attempt will be lost.")) renderHome();
+  });
+  function finishSet(){
+    const total = state.order.length;
+    let score=0; Object.values(state.answers).forEach(a=>{if(a.chosen===a.correct)score++});
+    const pct = Math.round((score/total)*100);
+    const prevBest = progress[state.setIndex]||0;
+    if (pct>prevBest){ progress[state.setIndex]=pct; saveProgress(progress); }
+    $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
+    $("ringTxt").textContent = pct+"%";
+    $("ring").style.background = `conic-gradient(var(--gold) ${pct*3.6}deg, #0d1730 ${pct*3.6}deg)`;
+    $("resTitle").textContent = pct>=70?"Excellent Work! 🎉":pct>=50?"Good Effort! 👍":"Keep Practising 💪";
+    $("resText").textContent = `You scored ${score} out of ${total} in Set ${state.setIndex+1}.`;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  $("retryBtn").addEventListener("click",()=>startSet(state.setIndex));
+  $("homeBtn").addEventListener("click",renderHome);
+  $("reviewBtn").addEventListener("click",()=>{
+    state.idx=0;
+    $("result").classList.add("hidden"); $("quiz").classList.remove("hidden");
+    renderQuestion();
+  });
+  renderHome();
+  if ("serviceWorker" in navigator){
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(err => console.log("SW failed:", err));
+    });
+  }
+})();
+</script>
+</body>
+  </html>
