@@ -1,5 +1,5 @@
 // sw.js — JAMB Commerce offline cache
-const CACHE = "jamb-commerce-v1";
+const CACHE = "jamb-commerce-v2";
 const ASSETS = [
   "./",
   "./index.html",
